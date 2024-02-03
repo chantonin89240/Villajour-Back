@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Villajour.API", "Villajour.API\Villajour.API.csproj", "{D13E909E-EA0C-4EB8-8464-73A95C3E7B69}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Villajour.Domain", "Villajour.Domain\Villajour.Domain.csproj", "{41EF39FC-B4EA-4C21-A11F-819E7DE9AE28}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Villajour.Application", "Villajour.Application\Villajour.Application.csproj", "{8B44CC40-21E8-4E12-88CB-BDA4D0014313}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Villajour.Persistence", "Villajour.Persistence\Villajour.Persistence.csproj", "{535BD229-B10E-4124-9D0B-6F0B4BDA8685}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Villajour.External", "Villajour.External\Villajour.External.csproj", "{D6934255-A845-4871-8C04-70BE5D816629}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D13E909E-EA0C-4EB8-8464-73A95C3E7B69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D13E909E-EA0C-4EB8-8464-73A95C3E7B69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D13E909E-EA0C-4EB8-8464-73A95C3E7B69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D13E909E-EA0C-4EB8-8464-73A95C3E7B69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41EF39FC-B4EA-4C21-A11F-819E7DE9AE28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41EF39FC-B4EA-4C21-A11F-819E7DE9AE28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41EF39FC-B4EA-4C21-A11F-819E7DE9AE28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41EF39FC-B4EA-4C21-A11F-819E7DE9AE28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B44CC40-21E8-4E12-88CB-BDA4D0014313}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B44CC40-21E8-4E12-88CB-BDA4D0014313}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B44CC40-21E8-4E12-88CB-BDA4D0014313}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B44CC40-21E8-4E12-88CB-BDA4D0014313}.Release|Any CPU.Build.0 = Release|Any CPU
+		{535BD229-B10E-4124-9D0B-6F0B4BDA8685}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{535BD229-B10E-4124-9D0B-6F0B4BDA8685}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{535BD229-B10E-4124-9D0B-6F0B4BDA8685}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{535BD229-B10E-4124-9D0B-6F0B4BDA8685}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6934255-A845-4871-8C04-70BE5D816629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6934255-A845-4871-8C04-70BE5D816629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6934255-A845-4871-8C04-70BE5D816629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6934255-A845-4871-8C04-70BE5D816629}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E64DE06-4301-4E52-98D9-ABF14CDF6494}
+	EndGlobalSection
+EndGlobal
