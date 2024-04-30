@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Villajour.Application.Commands.Interface;
 
 namespace Villajour.Persistence
 {
@@ -14,6 +15,10 @@ namespace Villajour.Persistence
             {
                 options.UseSqlServer(connectionString);
             });
+
+            services.AddScoped<IVilleajourDbContext, VilleajourDbContext>();
+
+            services.AddScoped<VilleajourDbContextInitialiser>();
 
             return services;
         }
