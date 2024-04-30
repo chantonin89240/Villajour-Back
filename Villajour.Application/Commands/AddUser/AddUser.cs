@@ -42,7 +42,7 @@ public class AddUserCommandHandler : IRequestHandler<AddUserCommand, UserEntity>
 
         };
 
-        _context.Users.Add(entity);
+        //_context.Users.Add(entity);
 
         await _context.SaveChangesAsync(cancellationToken);
 

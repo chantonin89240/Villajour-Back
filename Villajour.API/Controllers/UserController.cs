@@ -6,8 +6,7 @@ using Villajour.Domain.Common;
 namespace Villajour.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public abstract class UserController : ApiControllerBase
+    public class UserController : ApiControllerBase
     {
         [HttpPost]
         public async Task<IActionResult> AddUser([FromBody] AddUserCommand command)
