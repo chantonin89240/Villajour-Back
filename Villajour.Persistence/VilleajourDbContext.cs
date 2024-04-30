@@ -7,8 +7,8 @@ namespace Villajour.Persistence;
 
 public class VilleajourDbContext : DbContext, IVilleajourDbContext
 {
-    public DbSet<UserEntity> Users => Set<UserEntity>();
-    
+    //    public DbSet<UserEntity> Users => Set<UserEntity>();
+
     public VilleajourDbContext(DbContextOptions<VilleajourDbContext> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder builder)

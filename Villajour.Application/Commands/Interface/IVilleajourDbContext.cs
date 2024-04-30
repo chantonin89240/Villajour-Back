@@ -10,7 +10,7 @@ namespace Villajour.Application.Commands.Interface
 {
     public interface IVilleajourDbContext
     {
-        DbSet<UserEntity> Users { get; }
+        //DbSet<UserEntity> Users { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellation = default);
     }
