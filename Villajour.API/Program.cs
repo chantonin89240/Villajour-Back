@@ -1,3 +1,4 @@
+using Villajour.API.Helpers;
 using Villajour.Application;
 using Villajour.Persistence;
 
@@ -9,17 +10,23 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpClient();
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    await app.InitialiseDatabaseAsync();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<JwtMiddleware>();
 
 app.UseHttpsRedirection();
 

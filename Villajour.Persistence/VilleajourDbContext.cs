@@ -1,17 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using Villajour.Application.Commands.Interface;
+using Villajour.Domain.Common;
 
-namespace Villajour.Persistence
+namespace Villajour.Persistence;
+
+public class VilleajourDbContext : DbContext, IVilleajourDbContext
 {
-    public class VilleajourDbContext : DbContext
+    //    public DbSet<UserEntity> Users => Set<UserEntity>();
+
+    public VilleajourDbContext(DbContextOptions<VilleajourDbContext> options) : base(options) { }
+
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        public VilleajourDbContext(DbContextOptions<VilleajourDbContext> options) : base(options) { }
+        builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        base.OnModelCreating(builder);
 
-            base.OnModelCreating(builder);
-        }
     }
 }
