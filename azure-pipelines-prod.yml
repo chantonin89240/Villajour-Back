@@ -38,3 +38,5 @@ steps:
     arguments: '--configuration $(buildConfiguration)'
 
 - task: QodanaScan@2024
+  env:
+    QODANA_TOKEN: $(QODANA_TOKEN)
