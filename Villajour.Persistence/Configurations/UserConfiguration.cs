@@ -8,6 +8,6 @@ public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
 {
     public void Configure(EntityTypeBuilder<UserEntity> builder)
     {
-        builder.HasKey(pk => new { pk.UserId });
+        builder.HasKey(pk => new { pk.Id });
     }
 }
