@@ -17,19 +17,19 @@ namespace Villajour.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.4")
+                .HasAnnotation("ProductVersion", "8.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Villajour.Domain.Common.AnnouncementEntity", b =>
                 {
-                    b.Property<int>("AnnouncementId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AnnouncementId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AnnouncementTypeId")
                         .HasColumnType("int")
@@ -53,7 +53,7 @@ namespace Villajour.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnOrder(2);
 
-                    b.HasKey("AnnouncementId");
+                    b.HasKey("Id");
 
                     b.HasIndex("AnnouncementTypeId");
 
@@ -64,72 +64,68 @@ namespace Villajour.Persistence.Migrations
 
             modelBuilder.Entity("Villajour.Domain.Common.AnnouncementTypeEntity", b =>
                 {
-                    b.Property<int>("AnnouncementTypeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AnnouncementTypeId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Libelle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnOrder(1);
 
-                    b.HasKey("AnnouncementTypeId");
+                    b.HasKey("Id");
 
                     b.ToTable("AnnouncementTypes");
                 });
 
             modelBuilder.Entity("Villajour.Domain.Common.AppointmentEntity", b =>
                 {
-                    b.Property<int>("AppointmentId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppointmentId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AppointmentTypeId")
                         .HasColumnType("int")
-                        .HasColumnOrder(7);
-
-                    b.Property<DateOnly>("Date")
-                        .HasColumnType("date")
-                        .HasColumnOrder(1);
+                        .HasColumnOrder(6);
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnOrder(5);
+                        .HasColumnOrder(4);
 
-                    b.Property<TimeOnly>("EndTime")
-                        .HasColumnType("time")
-                        .HasColumnOrder(3);
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(2);
 
                     b.Property<int>("MairieId")
                         .HasColumnType("int")
-                        .HasColumnOrder(8);
+                        .HasColumnOrder(7);
 
-                    b.Property<TimeOnly>("StartTime")
-                        .HasColumnType("time")
-                        .HasColumnOrder(2);
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(1);
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnOrder(4);
+                        .HasColumnOrder(3);
 
                     b.Property<int>("UserId")
                         .HasColumnType("int")
-                        .HasColumnOrder(9);
+                        .HasColumnOrder(8);
 
                     b.Property<string>("Validation")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnOrder(6);
+                        .HasColumnOrder(5);
 
-                    b.HasKey("AppointmentId");
+                    b.HasKey("Id");
 
                     b.HasIndex("AppointmentTypeId");
 
@@ -142,31 +138,31 @@ namespace Villajour.Persistence.Migrations
 
             modelBuilder.Entity("Villajour.Domain.Common.AppointmentTypeEntity", b =>
                 {
-                    b.Property<int>("AppointmentTypeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppointmentTypeId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Libelle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnOrder(1);
 
-                    b.HasKey("AppointmentTypeId");
+                    b.HasKey("Id");
 
                     b.ToTable("AppointmentTypes");
                 });
 
             modelBuilder.Entity("Villajour.Domain.Common.ContactEntity", b =>
                 {
-                    b.Property<int>("ContactId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContactId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ContactTypeId")
                         .HasColumnType("int")
@@ -194,7 +190,7 @@ namespace Villajour.Persistence.Migrations
                         .HasColumnType("int")
                         .HasColumnOrder(6);
 
-                    b.HasKey("ContactId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ContactTypeId");
 
@@ -207,31 +203,31 @@ namespace Villajour.Persistence.Migrations
 
             modelBuilder.Entity("Villajour.Domain.Common.ContactTypeEntity", b =>
                 {
-                    b.Property<int>("ContactTypeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContactTypeId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Libelle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnOrder(1);
 
-                    b.HasKey("ContactTypeId");
+                    b.HasKey("Id");
 
                     b.ToTable("ContactTypes");
                 });
 
             modelBuilder.Entity("Villajour.Domain.Common.DocumentEntity", b =>
                 {
-                    b.Property<int>("DocumentId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DocumentId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateOnly>("Date")
                         .HasColumnType("date")
@@ -260,7 +256,7 @@ namespace Villajour.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnOrder(2);
 
-                    b.HasKey("DocumentId");
+                    b.HasKey("Id");
 
                     b.HasIndex("DocumentTypeId");
 
@@ -271,68 +267,64 @@ namespace Villajour.Persistence.Migrations
 
             modelBuilder.Entity("Villajour.Domain.Common.DocumentTypeEntity", b =>
                 {
-                    b.Property<int>("DocumentTypeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DocumentTypeId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Libelle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnOrder(1);
 
-                    b.HasKey("DocumentTypeId");
+                    b.HasKey("Id");
 
                     b.ToTable("DocumentTypes");
                 });
 
             modelBuilder.Entity("Villajour.Domain.Common.EventEntity", b =>
                 {
-                    b.Property<int>("EventId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EventId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnOrder(4);
-
-                    b.Property<DateOnly>("Date")
-                        .HasColumnType("date")
-                        .HasColumnOrder(1);
+                        .HasColumnOrder(3);
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnOrder(6);
+                        .HasColumnOrder(5);
 
-                    b.Property<TimeOnly>("EndTime")
-                        .HasColumnType("time")
-                        .HasColumnOrder(3);
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(2);
 
                     b.Property<int>("EventTypeId")
                         .HasColumnType("int")
-                        .HasColumnOrder(7);
+                        .HasColumnOrder(6);
 
                     b.Property<int>("MairieId")
                         .HasColumnType("int")
-                        .HasColumnOrder(8);
+                        .HasColumnOrder(7);
 
-                    b.Property<TimeOnly>("StartTime")
-                        .HasColumnType("time")
-                        .HasColumnOrder(2);
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(1);
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnOrder(5);
+                        .HasColumnOrder(4);
 
-                    b.HasKey("EventId");
+                    b.HasKey("Id");
 
                     b.HasIndex("EventTypeId");
 
@@ -343,31 +335,31 @@ namespace Villajour.Persistence.Migrations
 
             modelBuilder.Entity("Villajour.Domain.Common.EventTypeEntity", b =>
                 {
-                    b.Property<int>("EventTypeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EventTypeId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Libelle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnOrder(1);
 
-                    b.HasKey("EventTypeId");
+                    b.HasKey("Id");
 
                     b.ToTable("EventTypes");
                 });
 
             modelBuilder.Entity("Villajour.Domain.Common.FavoriteEntity", b =>
                 {
-                    b.Property<int>("FavoriteId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FavoriteId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -378,7 +370,7 @@ namespace Villajour.Persistence.Migrations
                         .HasColumnType("int")
                         .HasColumnOrder(1);
 
-                    b.HasKey("FavoriteId");
+                    b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
@@ -387,12 +379,12 @@ namespace Villajour.Persistence.Migrations
 
             modelBuilder.Entity("Villajour.Domain.Common.MairieEntity", b =>
                 {
-                    b.Property<int>("MairieId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MairieId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Picture")
                         .IsRequired()
@@ -403,19 +395,19 @@ namespace Villajour.Persistence.Migrations
                         .HasColumnType("int")
                         .HasColumnOrder(2);
 
-                    b.HasKey("MairieId");
+                    b.HasKey("Id");
 
                     b.ToTable("Mairies");
                 });
 
             modelBuilder.Entity("Villajour.Domain.Common.ScheduleMairieEntity", b =>
                 {
-                    b.Property<int>("ScheduleId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScheduleId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateOnly>("Date")
                         .HasColumnType("date")
@@ -433,7 +425,7 @@ namespace Villajour.Persistence.Migrations
                         .HasColumnType("time")
                         .HasColumnOrder(2);
 
-                    b.HasKey("ScheduleId");
+                    b.HasKey("Id");
 
                     b.HasIndex("MairieId");
 
@@ -442,19 +434,19 @@ namespace Villajour.Persistence.Migrations
 
             modelBuilder.Entity("Villajour.Domain.Common.UserEntity", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Picture")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnOrder(1);
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
                 });

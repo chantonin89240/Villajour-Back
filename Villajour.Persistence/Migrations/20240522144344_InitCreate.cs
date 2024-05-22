@@ -15,99 +15,99 @@ namespace Villajour.Persistence.Migrations
                 name: "AnnouncementTypes",
                 columns: table => new
                 {
-                    AnnouncementTypeId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Libelle = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AnnouncementTypes", x => x.AnnouncementTypeId);
+                    table.PrimaryKey("PK_AnnouncementTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AppointmentTypes",
                 columns: table => new
                 {
-                    AppointmentTypeId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Libelle = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppointmentTypes", x => x.AppointmentTypeId);
+                    table.PrimaryKey("PK_AppointmentTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "ContactTypes",
                 columns: table => new
                 {
-                    ContactTypeId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Libelle = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ContactTypes", x => x.ContactTypeId);
+                    table.PrimaryKey("PK_ContactTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "DocumentTypes",
                 columns: table => new
                 {
-                    DocumentTypeId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Libelle = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DocumentTypes", x => x.DocumentTypeId);
+                    table.PrimaryKey("PK_DocumentTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "EventTypes",
                 columns: table => new
                 {
-                    EventTypeId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Libelle = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventTypes", x => x.EventTypeId);
+                    table.PrimaryKey("PK_EventTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Mairies",
                 columns: table => new
                 {
-                    MairieId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Picture = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Siret = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Mairies", x => x.MairieId);
+                    table.PrimaryKey("PK_Mairies", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Picture = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Announcements",
                 columns: table => new
                 {
-                    AnnouncementId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateOnly>(type: "date", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -117,18 +117,18 @@ namespace Villajour.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Announcements", x => x.AnnouncementId);
+                    table.PrimaryKey("PK_Announcements", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Announcements_AnnouncementTypes_AnnouncementTypeId",
                         column: x => x.AnnouncementTypeId,
                         principalTable: "AnnouncementTypes",
-                        principalColumn: "AnnouncementTypeId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Announcements_Mairies_MairieId",
                         column: x => x.MairieId,
                         principalTable: "Mairies",
-                        principalColumn: "MairieId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -136,7 +136,7 @@ namespace Villajour.Persistence.Migrations
                 name: "Documents",
                 columns: table => new
                 {
-                    DocumentId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateOnly>(type: "date", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -147,18 +147,18 @@ namespace Villajour.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Documents", x => x.DocumentId);
+                    table.PrimaryKey("PK_Documents", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Documents_DocumentTypes_DocumentTypeId",
                         column: x => x.DocumentTypeId,
                         principalTable: "DocumentTypes",
-                        principalColumn: "DocumentTypeId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Documents_Mairies_MairieId",
                         column: x => x.MairieId,
                         principalTable: "Mairies",
-                        principalColumn: "MairieId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -166,11 +166,10 @@ namespace Villajour.Persistence.Migrations
                 name: "Events",
                 columns: table => new
                 {
-                    EventId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateOnly>(type: "date", nullable: false),
-                    StartTime = table.Column<TimeOnly>(type: "time", nullable: false),
-                    EndTime = table.Column<TimeOnly>(type: "time", nullable: false),
+                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -179,18 +178,18 @@ namespace Villajour.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Events", x => x.EventId);
+                    table.PrimaryKey("PK_Events", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Events_EventTypes_EventTypeId",
                         column: x => x.EventTypeId,
                         principalTable: "EventTypes",
-                        principalColumn: "EventTypeId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Events_Mairies_MairieId",
                         column: x => x.MairieId,
                         principalTable: "Mairies",
-                        principalColumn: "MairieId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -198,7 +197,7 @@ namespace Villajour.Persistence.Migrations
                 name: "ScheduleMairies",
                 columns: table => new
                 {
-                    ScheduleId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateOnly>(type: "date", nullable: false),
                     StartTime = table.Column<TimeOnly>(type: "time", nullable: false),
@@ -207,12 +206,12 @@ namespace Villajour.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ScheduleMairies", x => x.ScheduleId);
+                    table.PrimaryKey("PK_ScheduleMairies", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ScheduleMairies_Mairies_MairieId",
                         column: x => x.MairieId,
                         principalTable: "Mairies",
-                        principalColumn: "MairieId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -220,11 +219,10 @@ namespace Villajour.Persistence.Migrations
                 name: "Appointments",
                 columns: table => new
                 {
-                    AppointmentId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateOnly>(type: "date", nullable: false),
-                    StartTime = table.Column<TimeOnly>(type: "time", nullable: false),
-                    EndTime = table.Column<TimeOnly>(type: "time", nullable: false),
+                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Validation = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -234,24 +232,24 @@ namespace Villajour.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Appointments", x => x.AppointmentId);
+                    table.PrimaryKey("PK_Appointments", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Appointments_AppointmentTypes_AppointmentTypeId",
                         column: x => x.AppointmentTypeId,
                         principalTable: "AppointmentTypes",
-                        principalColumn: "AppointmentTypeId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Appointments_Mairies_MairieId",
                         column: x => x.MairieId,
                         principalTable: "Mairies",
-                        principalColumn: "MairieId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Appointments_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -259,7 +257,7 @@ namespace Villajour.Persistence.Migrations
                 name: "Contacts",
                 columns: table => new
                 {
-                    ContactId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateOnly>(type: "date", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -270,24 +268,24 @@ namespace Villajour.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Contacts", x => x.ContactId);
+                    table.PrimaryKey("PK_Contacts", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Contacts_ContactTypes_ContactTypeId",
                         column: x => x.ContactTypeId,
                         principalTable: "ContactTypes",
-                        principalColumn: "ContactTypeId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Contacts_Mairies_MairieId",
                         column: x => x.MairieId,
                         principalTable: "Mairies",
-                        principalColumn: "MairieId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Contacts_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -295,19 +293,19 @@ namespace Villajour.Persistence.Migrations
                 name: "Favorites",
                 columns: table => new
                 {
-                    FavoriteId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Favorites", x => x.FavoriteId);
+                    table.PrimaryKey("PK_Favorites", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Favorites_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
