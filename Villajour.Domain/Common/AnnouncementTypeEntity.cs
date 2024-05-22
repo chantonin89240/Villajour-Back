@@ -8,7 +8,7 @@ public class AnnouncementTypeEntity
     [Key]
     [Required]
     [Column(Order = 0)]
-    public int AnnouncementTypeId { get; set; }
+    public int Id { get; set; }
 
     [Required]
     [Column(Order = 1)]

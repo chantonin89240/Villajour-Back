@@ -30,11 +30,11 @@ public class VilleajourDbContext : DbContext, IVilleajourDbContext
 
         // configuration de Users
         builder.Entity<UserEntity>()
-            .HasKey(i => i.UserId);
+            .HasKey(i => i.Id);
 
         // configuration de Mairies
         builder.Entity<MairieEntity>()
-            .HasKey(i => i.MairieId);
+            .HasKey(i => i.Id);
 
         // configuration de ScheduleMairies
         builder.Entity<ScheduleMairieEntity>()
@@ -46,7 +46,7 @@ public class VilleajourDbContext : DbContext, IVilleajourDbContext
 
         // configuration de AnnouncementType
         builder.Entity<AnnouncementTypeEntity>()
-            .HasKey(i => i.AnnouncementTypeId);
+            .HasKey(i => i.Id);
 
         // configuration de Announcement
         builder.Entity<AnnouncementEntity>()
@@ -63,7 +63,7 @@ public class VilleajourDbContext : DbContext, IVilleajourDbContext
 
         // configuration de AppointmentType
         builder.Entity<AppointmentTypeEntity>()
-            .HasKey(i => i.AppointmentTypeId);
+            .HasKey(i => i.Id);
 
         // configuration de Appointment
         builder.Entity<AppointmentEntity>()
@@ -85,7 +85,7 @@ public class VilleajourDbContext : DbContext, IVilleajourDbContext
 
         // configuration de ContactType
         builder.Entity<ContactTypeEntity>()
-            .HasKey(i => i.ContactTypeId);
+            .HasKey(i => i.Id);
 
         // configuration de Contact
         builder.Entity<ContactEntity>()
@@ -107,7 +107,7 @@ public class VilleajourDbContext : DbContext, IVilleajourDbContext
 
         // configuration de DocumentType
         builder.Entity<DocumentTypeEntity>()
-            .HasKey(i => i.DocumentTypeId);
+            .HasKey(i => i.Id);
 
         // configuration de Document
         builder.Entity<DocumentEntity>()
@@ -124,7 +124,7 @@ public class VilleajourDbContext : DbContext, IVilleajourDbContext
 
         // configuration de EventType
         builder.Entity<EventTypeEntity>()
-            .HasKey(i => i.EventTypeId);
+            .HasKey(i => i.Id);
 
         // configuration de Event
         builder.Entity<EventEntity>()

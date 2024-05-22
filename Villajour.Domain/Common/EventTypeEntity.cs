@@ -8,7 +8,7 @@ public class EventTypeEntity
     [Key]
     [Required]
     [Column(Order = 0)]
-    public int EventTypeId { get; set; }
+    public int Id { get; set; }
 
     [Required]
     [Column(Order = 1)]

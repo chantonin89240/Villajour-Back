@@ -9,7 +9,7 @@ public class DocumentEntity
     [Key]
     [Required]
     [Column(Order = 0)]
-    public int DocumentId { get; set; }
+    public int Id { get; set; }
 
     [Required]
     [Column(Order = 1)]

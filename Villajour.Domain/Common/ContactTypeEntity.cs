@@ -8,7 +8,7 @@ public class ContactTypeEntity
     [Key]
     [Required]
     [Column(Order = 0)]
-    public int ContactTypeId { get; set; }
+    public int Id { get; set; }
 
     [Required]
     [Column(Order = 1)]

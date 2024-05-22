@@ -8,7 +8,7 @@ public class UserEntity
     [Key]
     [Required]
     [Column(Order = 0)]
-    public int UserId { get; set; }
+    public int Id { get; set; }
 
     [Required]
     [Column(Order = 1)]
