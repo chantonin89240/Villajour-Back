@@ -19,4 +19,8 @@
     <ProjectReference Include="..\Villajour.Application\Villajour.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

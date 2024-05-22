@@ -7,7 +7,20 @@ namespace Villajour.Persistence;
 
 public class VilleajourDbContext : DbContext, IVilleajourDbContext
 {
-    //    public DbSet<UserEntity> Users => Set<UserEntity>();
+    public DbSet<UserEntity> Users => Set<UserEntity>();
+    public DbSet<MairieEntity> Mairies => Set<MairieEntity>();
+    public DbSet<ScheduleMairieEntity> ScheduleMairies => Set<ScheduleMairieEntity>();
+    public DbSet<AnnouncementEntity> Announcements => Set<AnnouncementEntity>();
+    public DbSet<AnnouncementTypeEntity> AnnouncementTypes => Set<AnnouncementTypeEntity>();
+    public DbSet<AppointmentEntity> Appointments => Set<AppointmentEntity>();
+    public DbSet<AppointmentTypeEntity> AppointmentTypes => Set<AppointmentTypeEntity>();
+    public DbSet<ContactEntity> Contacts => Set<ContactEntity>();
+    public DbSet<ContactTypeEntity> ContactTypes => Set<ContactTypeEntity>();
+    public DbSet<DocumentEntity> Documents => Set<DocumentEntity>();
+    public DbSet<DocumentTypeEntity> DocumentTypes => Set<DocumentTypeEntity>();
+    public DbSet<EventEntity> Events => Set<EventEntity>();
+    public DbSet<EventTypeEntity> EventTypes => Set<EventTypeEntity>();
+    public DbSet<FavoriteEntity> Favorites => Set<FavoriteEntity>();
 
     public VilleajourDbContext(DbContextOptions<VilleajourDbContext> options) : base(options) { }
 
@@ -15,7 +28,124 @@ public class VilleajourDbContext : DbContext, IVilleajourDbContext
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-        base.OnModelCreating(builder);
+        // configuration de Users
+        builder.Entity<UserEntity>()
+            .HasKey(i => i.UserId);
 
+        // configuration de Mairies
+        builder.Entity<MairieEntity>()
+            .HasKey(i => i.MairieId);
+
+        // configuration de ScheduleMairies
+        builder.Entity<ScheduleMairieEntity>()
+            .HasOne<MairieEntity>()
+            .WithMany()
+            .HasForeignKey(p => p.MairieId);
+
+
+
+        // configuration de AnnouncementType
+        builder.Entity<AnnouncementTypeEntity>()
+            .HasKey(i => i.AnnouncementTypeId);
+
+        // configuration de Announcement
+        builder.Entity<AnnouncementEntity>()
+            .HasOne<MairieEntity>()
+            .WithMany()
+            .HasForeignKey(p => p.MairieId);
+
+        builder.Entity<AnnouncementEntity>()
+            .HasOne<AnnouncementTypeEntity>()
+            .WithMany()
+            .HasForeignKey(p => p.AnnouncementTypeId);
+
+
+
+        // configuration de AppointmentType
+        builder.Entity<AppointmentTypeEntity>()
+            .HasKey(i => i.AppointmentTypeId);
+
+        // configuration de Appointment
+        builder.Entity<AppointmentEntity>()
+            .HasOne<MairieEntity>()
+            .WithMany()
+            .HasForeignKey(p => p.MairieId);
+
+        builder.Entity<AppointmentEntity>()
+              .HasOne<UserEntity>()
+              .WithMany()
+              .HasForeignKey(p => p.UserId);
+
+        builder.Entity<AppointmentEntity>()
+            .HasOne<AppointmentTypeEntity>()
+            .WithMany()
+            .HasForeignKey(p => p.AppointmentTypeId);
+
+
+
+        // configuration de ContactType
+        builder.Entity<ContactTypeEntity>()
+            .HasKey(i => i.ContactTypeId);
+
+        // configuration de Contact
+        builder.Entity<ContactEntity>()
+            .HasOne<MairieEntity>()
+            .WithMany()
+            .HasForeignKey(p => p.MairieId);
+
+        builder.Entity<ContactEntity>()
+              .HasOne<UserEntity>()
+              .WithMany()
+              .HasForeignKey(p => p.UserId);
+
+        builder.Entity<ContactEntity>()
+            .HasOne<ContactTypeEntity>()
+            .WithMany()
+            .HasForeignKey(p => p.ContactTypeId);
+
+
+
+        // configuration de DocumentType
+        builder.Entity<DocumentTypeEntity>()
+            .HasKey(i => i.DocumentTypeId);
+
+        // configuration de Document
+        builder.Entity<DocumentEntity>()
+            .HasOne<MairieEntity>()
+            .WithMany()
+            .HasForeignKey(p => p.MairieId);
+
+        builder.Entity<DocumentEntity>()
+            .HasOne<DocumentTypeEntity>()
+            .WithMany()
+            .HasForeignKey(p => p.DocumentTypeId);
+
+
+
+        // configuration de EventType
+        builder.Entity<EventTypeEntity>()
+            .HasKey(i => i.EventTypeId);
+
+        // configuration de Event
+        builder.Entity<EventEntity>()
+            .HasOne<MairieEntity>()
+            .WithMany()
+            .HasForeignKey(p => p.MairieId);
+
+        builder.Entity<EventEntity>()
+            .HasOne<EventTypeEntity>()
+            .WithMany()
+            .HasForeignKey(p => p.EventTypeId);
+
+
+
+        // configuration de Favorite
+        builder.Entity<FavoriteEntity>()
+            .HasOne<UserEntity>()
+            .WithMany()
+            .HasForeignKey(p => p.UserId);
+
+
+        base.OnModelCreating(builder);
     }
 }
