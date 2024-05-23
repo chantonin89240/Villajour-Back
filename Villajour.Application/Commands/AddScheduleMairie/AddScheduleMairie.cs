@@ -9,7 +9,7 @@ public record class AddScheduleMairieCommand : IRequest<ScheduleMairieEntity>
     public DateOnly Date { get; set; }
     public TimeOnly StartTime { get; set; }
     public TimeOnly EndTime { get; set; }
-    public int MairieId { get; set; }
+    public Guid MairieId { get; set; }
 }
 
 public class AddScheduleMairieCommandHandler : IRequestHandler<AddScheduleMairieCommand, ScheduleMairieEntity>
