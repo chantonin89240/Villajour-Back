@@ -21,12 +21,12 @@ namespace Villajour.API.Helpers
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if (token != null)
-                await attachUserToContext(context, token);
+                await AttachUserToContext(context, token);
 
             await _next(context);
         }
 
-        private async Task attachUserToContext(HttpContext context, string token)
+        private async Task AttachUserToContext(HttpContext context, string token)
         {
             try
             {

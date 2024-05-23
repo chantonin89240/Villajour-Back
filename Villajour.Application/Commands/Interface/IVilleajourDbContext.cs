@@ -10,7 +10,20 @@ namespace Villajour.Application.Commands.Interface
 {
     public interface IVilleajourDbContext
     {
-        //DbSet<UserEntity> Users { get; }
+        DbSet<AnnouncementEntity> Announcements { get; }
+        DbSet<AnnouncementTypeEntity> AnnouncementTypes { get; }
+        DbSet<AppointmentEntity> Appointments { get; }
+        DbSet<AppointmentTypeEntity> AppointmentTypes { get; }
+        DbSet<ContactEntity> Contacts { get; }
+        DbSet<ContactTypeEntity> ContactTypes { get; }
+        DbSet<DocumentEntity> Documents { get; }
+        DbSet<DocumentTypeEntity> DocumentTypes { get; }
+        DbSet<EventEntity> Events { get; }
+        DbSet<EventTypeEntity> EventTypes { get; }
+        DbSet<FavoriteEntity> Favorites { get; }
+        DbSet<MairieEntity> Mairies { get; }
+        DbSet<ScheduleMairieEntity> ScheduleMairies { get; }
+        DbSet<UserEntity> Users { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellation = default);
     }
