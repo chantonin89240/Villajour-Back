@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Villajour.Domain.Common;
 
-public class UserEntity
+public class FavoriteEntity
 {
     [Key]
     [Required]
@@ -12,5 +12,9 @@ public class UserEntity
 
     [Required]
     [Column(Order = 1)]
-    public string? Picture { get; set; }
+    public int UserId { get; set; }
+
+    [Required]
+    [Column(Order = 2)]
+    public string? Type { get; set; }
 }

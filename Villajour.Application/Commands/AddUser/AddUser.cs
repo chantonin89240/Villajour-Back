@@ -6,14 +6,7 @@ namespace Villajour.Application.Commands.AddUser;
 
 public record class AddUserCommand : IRequest<UserEntity>
 {
-    public string? Name { get; set; }
-    public string? Email { get; set; }
-    public int Status { get; set; }
-    public string? City { get; set; }
-    public int PostalCode { get; set; }
-    public string? Country { get; set; }
-    public string? Address { get; set; }
-    public int Phone { get; set; }
+    public string? Picture { get; set; }
 }
 
 public class AddUserCommandHandler : IRequestHandler<AddUserCommand, UserEntity>
@@ -29,17 +22,7 @@ public class AddUserCommandHandler : IRequestHandler<AddUserCommand, UserEntity>
     {
         var entity = new UserEntity
         {
-            Name = request.Name,
-            Email = request.Email,
-            Password = "",
-            Status = request.Status,
-            City = request.City,
-            PostalCode = request.PostalCode,
-            Country = request.Country,
-            Address = request.Address,
-            Phone = request.Phone,
-
-
+            Picture = request.Picture,
         };
 
         //_context.Users.Add(entity);
