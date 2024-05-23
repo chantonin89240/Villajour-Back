@@ -24,5 +24,5 @@ public class ScheduleMairieEntity
 
     [Required]
     [Column(Order = 4)]
-    public int MairieId { get; set; }
+    public Guid MairieId { get; set; }
 }

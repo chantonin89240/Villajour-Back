@@ -14,11 +14,9 @@ public class EventEntity
     [Column(Order = 1)]
     public DateTime StartTime { get; set; }
 
-    [Required]
     [Column(Order = 2)]
     public DateTime EndTime { get; set; }
 
-    [Required]
     [Column(Order = 3)]
     public string? Address { get; set; }
 
@@ -26,7 +24,6 @@ public class EventEntity
     [Column(Order = 4)]
     public string? Title { get; set; }
 
-    [Required]
     [Column(Order = 5)]
     public string? Description { get; set; }
 
@@ -36,5 +33,5 @@ public class EventEntity
 
     [Required]
     [Column(Order = 7)]
-    public int MairieId { get; set; }
+    public Guid MairieId { get; set; }
 }

@@ -19,7 +19,6 @@ public class DocumentEntity
     [Column(Order = 2)]
     public string? Title { get; set; }
 
-    [Required]
     [Column(Order = 3)]
     public string? Description { get; set; }
 
@@ -33,5 +32,5 @@ public class DocumentEntity
 
     [Required]
     [Column(Order = 6)]
-    public int MairieId { get; set; }
+    public Guid MairieId { get; set; }
 }

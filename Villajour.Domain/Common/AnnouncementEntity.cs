@@ -18,7 +18,6 @@ public class AnnouncementEntity
     [Column(Order = 2)]
     public string? Title { get; set; }
 
-    [Required]
     [Column(Order = 3)]
     public string?  Description { get; set; }
 
@@ -28,5 +27,5 @@ public class AnnouncementEntity
 
     [Required]
     [Column(Order = 5)]
-    public int MairieId { get; set; }
+    public Guid MairieId { get; set; }
 }
