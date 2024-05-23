@@ -25,7 +25,7 @@ public class AddUserCommandHandler : IRequestHandler<AddUserCommand, UserEntity>
             Picture = request.Picture,
         };
 
-        //_context.Users.Add(entity);
+        _context.Users.Add(entity);
 
         await _context.SaveChangesAsync(cancellationToken);
 

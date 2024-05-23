@@ -36,9 +36,8 @@ public class VilleajourDbContextInitialiser
         {
             await _context.Database.MigrateAsync();
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            //_logger.LogError(ex, "An error occurred while initialising the database.");
             throw;
         }
     }

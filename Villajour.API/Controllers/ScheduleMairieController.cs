@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Villajour.Application.Commands.AddUser;
+using Villajour.Application.Commands.AddScheduleMairie;
 using Villajour.Domain.Common;
 
 namespace Villajour.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : ApiControllerBase
+    public class ScheduleMairieController : ApiControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> AddUser([FromBody] AddUserCommand command)
+        public async Task<IActionResult> Add([FromBody] AddScheduleMairieCommand command)
         {
             if (command == null)
             {
@@ -18,15 +18,15 @@ namespace Villajour.API.Controllers
 
             try
             {
-                UserEntity user = await Mediator.Send(command);
+                ScheduleMairieEntity scheduleMairie = await Mediator.Send(command);
 
-                if (user != null)
+                if (scheduleMairie != null)
                 {
-                    return Ok(user);
+                    return Ok(scheduleMairie);
                 }
                 else
                 {
-                    return NotFound("L'utilisateur ne peut pas être ajouté");
+                    return NotFound("L'horaire de la mairie ne peut pas être ajouté");
                 }
             }
             catch (Exception)
