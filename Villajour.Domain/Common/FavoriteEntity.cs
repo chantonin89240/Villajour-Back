@@ -12,7 +12,7 @@ public class FavoriteEntity
 
     [Required]
     [Column(Order = 1)]
-    public int UserId { get; set; }
+    public Guid UserId { get; set; }
 
     [Required]
     [Column(Order = 2)]

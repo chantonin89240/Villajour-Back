@@ -14,7 +14,6 @@ public class AppointmentEntity
     [Column(Order = 1)]
     public DateTime StartTime { get; set; }
 
-    [Required]
     [Column(Order = 2)]
     public DateTime EndTime { get; set; }
 
@@ -22,13 +21,12 @@ public class AppointmentEntity
     [Column(Order = 3)]
     public string? Title { get; set; }
 
-    [Required]
     [Column(Order = 4)]
     public string? Description { get; set; }
 
     [Required]
     [Column(Order = 5)]
-    public string? Validation { get; set; }
+    public string? Statut { get; set; }
 
     [Required]
     [Column(Order = 6)]
@@ -36,9 +34,9 @@ public class AppointmentEntity
 
     [Required]
     [Column(Order = 7)]
-    public int MairieId { get; set; }
+    public Guid MairieId { get; set; }
 
     [Required]
     [Column(Order = 8)]
-    public int UserId { get; set; }
+    public Guid UserId { get; set; }
 }

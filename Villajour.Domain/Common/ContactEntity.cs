@@ -18,7 +18,6 @@ public class ContactEntity
     [Column(Order = 2)]
     public string? Title { get; set; }
 
-    [Required]
     [Column(Order = 3)]
     public string? Description { get; set; }
 
@@ -28,9 +27,9 @@ public class ContactEntity
 
     [Required]
     [Column(Order = 5)]
-    public int MairieId { get; set; }
+    public Guid MairieId { get; set; }
 
     [Required]
     [Column(Order = 6)]
-    public int UserId { get; set; }
+    public Guid UserId { get; set; }
 }
