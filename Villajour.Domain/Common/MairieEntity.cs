@@ -11,15 +11,21 @@ namespace Villajour.Domain.Common;
 public class MairieEntity
 {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.None)]
     [Required]
     [Column(Order = 0)]
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     [Required]
     [Column(Order = 1)]
+    [RegularExpression(@"^\d{15}$")]
+    public string? Phone { get; set; }
+
+    [Column(Order = 2)]
     public string? Picture { get; set; }
 
     [Required]
-    [Column(Order = 2)]
-    public int Siret { get; set; }
+    [Column(Order = 3)]
+    [RegularExpression(@"^\d{14}$")]
+    public string? Siret { get; set; }
 }
