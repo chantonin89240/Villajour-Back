@@ -6,6 +6,8 @@ namespace Villajour.Application.Commands.AddUser;
 
 public record class AddUserCommand : IRequest<UserEntity>
 {
+    public Guid Id { get; set; }
+    public string? Phone { get; set; }
     public string? Picture { get; set; }
 }
 
@@ -22,6 +24,8 @@ public class AddUserCommandHandler : IRequestHandler<AddUserCommand, UserEntity>
     {
         var entity = new UserEntity
         {
+            Id = request.Id,
+            Phone = request.Phone,
             Picture = request.Picture,
         };
 
