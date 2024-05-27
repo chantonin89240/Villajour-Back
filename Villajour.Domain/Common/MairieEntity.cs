@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Villajour.Domain.Common;
 
@@ -18,7 +13,7 @@ public class MairieEntity
 
     [Required]
     [Column(Order = 1)]
-    [RegularExpression(@"^\d{15}$")]
+    [RegularExpression(@"^\d{10}$")]
     public string? Phone { get; set; }
 
     [Column(Order = 2)]
@@ -28,4 +23,8 @@ public class MairieEntity
     [Column(Order = 3)]
     [RegularExpression(@"^\d{14}$")]
     public string? Siret { get; set; }
+
+    [Required]
+    [Column(Order = 4)]
+    public string? Address { get; set; }
 }
