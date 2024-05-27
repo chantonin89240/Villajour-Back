@@ -440,7 +440,6 @@ namespace Villajour.Persistence.Migrations
                         .HasColumnOrder(0);
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnOrder(1);
 

@@ -32,16 +32,14 @@ public class MairieController : ApiControllerBase
             command.Id = id;
             var mairie = await _mediator.Send(command);
 
-            return Ok(mairie);
-
-            //if (mairie != null)
-            //{
-                //return Ok(mairie);
-            //}
-            //else
-            //{
-            //    return NotFound("La mairie n'existe pas !");
-            //}
+            if (mairie != null)
+            {
+                return Ok(mairie);
+            }
+            else
+            {
+                return NotFound("La mairie n'existe pas !");
+            }
         }
         catch (Exception)
         {

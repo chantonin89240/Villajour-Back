@@ -11,9 +11,8 @@ public class UserEntity
     [Column(Order = 0)]
     public Guid Id { get; set; }
 
-    [Required]
     [Column(Order = 1)]
-    [RegularExpression(@"^\d{15}$")]
+    [RegularExpression(@"^\d{10}$")]
     public string? Phone { get; set; }
 
     [Column(Order = 2)]
