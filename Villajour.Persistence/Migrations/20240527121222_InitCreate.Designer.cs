@@ -12,7 +12,7 @@ using Villajour.Persistence;
 namespace Villajour.Persistence.Migrations
 {
     [DbContext(typeof(VilleajourDbContext))]
-    [Migration("20240527073922_InitCreate")]
+    [Migration("20240527121222_InitCreate")]
     partial class InitCreate
     {
         /// <inheritdoc />
@@ -443,7 +443,6 @@ namespace Villajour.Persistence.Migrations
                         .HasColumnOrder(0);
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnOrder(1);
 

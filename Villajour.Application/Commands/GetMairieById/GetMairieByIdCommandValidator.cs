@@ -1,11 +1,10 @@
 ﻿using FluentValidation;
-using Villajour.Application.Commands.UpdateMairie;
 
 namespace Villajour.Application.Commands.GetMairieById;
 
-public class GetMairiesCommandValidator : AbstractValidator<GetMairieByIdCommand>
+public class GetMairieByIdCommandValidator : AbstractValidator<GetMairieByIdCommand>
 {
-    public GetMairiesCommandValidator()
+    public GetMairieByIdCommandValidator()
     {
         RuleFor(c => c.Id).NotEmpty();
     }
