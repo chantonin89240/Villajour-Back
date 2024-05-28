@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Villajour.Application.Commands.Events.AddEvent;
 using Villajour.Application.Commands.Events.DeleteEvent;
+using Villajour.Application.Commands.Events.GetEventByMairie;
 using Villajour.Application.Commands.Events.GetEventComingByMairie;
 using Villajour.Application.Commands.Events.GetEventHistoByMairie;
 using Villajour.Application.Commands.Events.UpdateEvent;
@@ -88,7 +89,7 @@ public class EventController : ApiControllerBase
 
         try
         {
-            GetEventComingByMairieCommand command = new GetEventComingByMairieCommand();
+            GetEventByMairieCommand command = new GetEventByMairieCommand();
             command.MairieId = MairieId;
             List<EventEntity> eventEnt = await _mediator.Send(command);
 
