@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Villajour.Application.Commands.AddMairie;
+using Villajour.Application.Commands.DeleteEvent;
 using Villajour.Application.Commands.DeleteMairie;
 using Villajour.Application.Commands.GetMairieById;
 using Villajour.Application.Commands.GetMairies;
+using Villajour.Application.Commands.UpdateEvent;
 using Villajour.Application.Commands.UpdateMairie;
 using Villajour.Domain.Common;
 
@@ -22,7 +24,7 @@ public class EventController : ApiControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetMairieById(Guid id)
+    public async Task<IActionResult> GetEventById(Guid id)
     {
         if (id.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
 
@@ -30,11 +32,11 @@ public class EventController : ApiControllerBase
         {
             GetMairieByIdCommand command = new GetMairieByIdCommand();
             command.Id = id;
-            var mairie = await _mediator.Send(command);
+            var eventEnt = await _mediator.Send(command);
 
-            if (mairie != null)
+            if (eventEnt != null)
             {
-                return Ok(mairie);
+                return Ok(eventEnt);
             }
             else
             {
@@ -48,14 +50,14 @@ public class EventController : ApiControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetMairies()
+    public async Task<IActionResult> GetEvents()
     {
         try
         {
             GetMairiesCommand command = new GetMairiesCommand();
-            List<MairieEntity> mairie = await _mediator.Send(command);
+            List<MairieEntity> eventEnt = await _mediator.Send(command);
 
-            return Ok(mairie);
+            return Ok(eventEnt);
         }
         catch (Exception)
         {
@@ -64,7 +66,7 @@ public class EventController : ApiControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddMairie([FromBody] AddMairieCommand command)
+    public async Task<IActionResult> AddEvent([FromBody] AddEventCommand command)
     {
         if (command == null)
         {
@@ -73,15 +75,15 @@ public class EventController : ApiControllerBase
 
         try
         {
-            MairieEntity mairie = await _mediator.Send(command);
+            EventEntity eventEnt = await _mediator.Send(command);
 
-            if (mairie != null)
+            if (eventEnt != null)
             {
-                return Ok(mairie);
+                return Ok(eventEnt);
             }
             else
             {
-                return NotFound("La mairie ne peut pas être ajouté");
+                return NotFound("L'événnement ne peut pas être ajouté");
             }
         }
         catch (Exception)
@@ -92,7 +94,7 @@ public class EventController : ApiControllerBase
 
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateMairie(Guid id, [FromBody] UpdateMairieCommand command)
+    public async Task<IActionResult> UpdateEvent(int id, [FromBody] UpdateEventCommand command)
     {
         if (command == null)
         {
@@ -103,15 +105,15 @@ public class EventController : ApiControllerBase
 
         try
         {
-            var mairie = await _mediator.Send(command);
+            var eventEnt = await _mediator.Send(command);
 
-            if (mairie != null)
+            if (eventEnt != null)
             {
-                return Ok(mairie);
+                return Ok(eventEnt);
             }
             else
             {
-                return NotFound("La mairie n'a pas pu être modifié !");
+                return NotFound("L'événnement n'a pas pu être modifié !");
             }
         }
         catch (Exception)
@@ -121,23 +123,23 @@ public class EventController : ApiControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteMairie(Guid id)
+    public async Task<IActionResult> DeleteEvent(int id)
     {
         if (id.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
 
         try
         {
-            DeleteMairieCommand command = new DeleteMairieCommand();
+            DeleteEventCommand command = new DeleteEventCommand();
             command.Id = id;
-            bool mairie = await _mediator.Send(command);
+            bool eventEnt = await _mediator.Send(command);
 
-            if (mairie)
+            if (eventEnt)
             {
                 return Ok();
             }
             else
             {
-                return StatusCode(400, "La mairie n'existe pas !");
+                return StatusCode(400, "L'événnement n'existe pas !");
             }
         }
         catch (Exception)

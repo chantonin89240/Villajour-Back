@@ -1,11 +1,12 @@
 ﻿using FluentValidation;
 
-namespace Villajour.Application.Commands.AddMairie;
+namespace Villajour.Application.Commands.UpdateEvent;
 
-public class AddEventCommandValidator : AbstractValidator<AddEventCommand>
+public class UpdateEventCommandValidator : AbstractValidator<UpdateEventCommand>
 {
-    public AddEventCommandValidator()
+    public UpdateEventCommandValidator()
     {
+        RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.StartTime).NotEmpty();
         RuleFor(c => c.Title).NotEmpty();
         RuleFor(c => c.Address).NotEmpty();

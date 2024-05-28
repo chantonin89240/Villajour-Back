@@ -2,9 +2,9 @@
 
 namespace Villajour.Application.Commands.UpdateMairie;
 
-public class deleteMairieCommandValidator : AbstractValidator<UpdateMairieCommand>
+public class UpdateMairieCommandValidator : AbstractValidator<UpdateMairieCommand>
 {
-    public deleteMairieCommandValidator()
+    public UpdateMairieCommandValidator()
     {
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.Phone).NotEmpty().Matches("^[0-9]+$").MinimumLength(10).MaximumLength(10); 

@@ -13,7 +13,6 @@ public record class AddEventCommand : IRequest<EventEntity>
     public string? Description { get; set; }
     public int EventTypeId { get; set; }
     public Guid MairieId { get; set; }
-    
 }
 
 public class AddEventCommandHandler : IRequestHandler<AddEventCommand, EventEntity>
