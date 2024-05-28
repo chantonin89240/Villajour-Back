@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Villajour.Application.Commands.AddScheduleMairie;
+using Villajour.Application.Commands.Mairies.AddScheduleMairie;
 using Villajour.Domain.Common;
 
 namespace Villajour.API.Controllers;

@@ -14,6 +14,7 @@ public class EventEntity
     [Column(Order = 1)]
     public DateTime StartTime { get; set; }
 
+    [Required]
     [Column(Order = 2)]
     public DateTime EndTime { get; set; }
 

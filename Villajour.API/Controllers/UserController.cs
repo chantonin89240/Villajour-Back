@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Villajour.Application.Commands.AddUser;
-using Villajour.Application.Commands.DeleteUser;
-using Villajour.Application.Commands.GetUserById;
-using Villajour.Application.Commands.UpdateUser;
+using Villajour.Application.Commands.Users.AddUser;
+using Villajour.Application.Commands.Users.DeleteUser;
+using Villajour.Application.Commands.Users.GetUserById;
+using Villajour.Application.Commands.Users.UpdateUser;
 using Villajour.Domain.Common;
 
 namespace Villajour.API.Controllers;

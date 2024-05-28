@@ -1,13 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Villajour.Application.Commands.AddMairie;
-using Villajour.Application.Commands.DeleteEvent;
-using Villajour.Application.Commands.DeleteMairie;
-using Villajour.Application.Commands.GetMairieById;
-using Villajour.Application.Commands.GetMairies;
-using Villajour.Application.Commands.UpdateEvent;
-using Villajour.Application.Commands.UpdateMairie;
+using Villajour.Application.Commands.Events.AddEvent;
+using Villajour.Application.Commands.Events.DeleteEvent;
+using Villajour.Application.Commands.Events.GetEventComingByMairie;
+using Villajour.Application.Commands.Events.GetEventHistoByMairie;
+using Villajour.Application.Commands.Events.UpdateEvent;
+using Villajour.Application.Commands.Mairies.GetMairieById;
 using Villajour.Domain.Common;
 
 namespace Villajour.API.Controllers;
@@ -23,8 +22,9 @@ public class EventController : ApiControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetEventById(Guid id)
+    // fonction pour récupérer les events favorit d'un utilisateur
+    [HttpGet("GetEventFavoriteByUser/{id}")]
+    public async Task<IActionResult> GetEventFavoriteByUser(Guid id)
     {
         if (id.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
 
@@ -49,13 +49,48 @@ public class EventController : ApiControllerBase
         }
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetEvents()
+    // fonction pour récupérer tous les events de toutes les mairies qu'un utilisateur a en favorit
+    [HttpGet("GetEventByMairieFavorite/{id}")]
+    public async Task<IActionResult> GetEventByMairieFavorite(Guid id)
     {
+        if (id.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
+
         try
         {
-            GetMairiesCommand command = new GetMairiesCommand();
-            List<MairieEntity> eventEnt = await _mediator.Send(command);
+            GetMairieByIdCommand command = new GetMairieByIdCommand();
+            command.Id = id;
+            var eventEnt = await _mediator.Send(command);
+
+            if (eventEnt != null)
+            {
+                return Ok(eventEnt);
+            }
+            else
+            {
+                return NotFound("La mairie n'existe pas !");
+            }
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, "Internal server error.");
+        }
+    }
+
+    /// <summary>
+    /// fonction pour récupérer tous les events d'un mairie
+    /// </summary>
+    /// <param name="MairieId"></param>
+    /// <returns>Liste de l'ensemble des events d'une mairies par ordre décroissant</returns>
+    [HttpGet("GetEventByMairie/{MairieId}")]
+    public async Task<IActionResult> GetEventByMairie(Guid MairieId)
+    {
+        if (MairieId.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
+
+        try
+        {
+            GetEventComingByMairieCommand command = new GetEventComingByMairieCommand();
+            command.MairieId = MairieId;
+            List<EventEntity> eventEnt = await _mediator.Send(command);
 
             return Ok(eventEnt);
         }
@@ -65,6 +100,61 @@ public class EventController : ApiControllerBase
         }
     }
 
+    /// <summary>
+    /// fonction pour récupérer les events a venir en fonction d'une mairie
+    /// </summary>
+    /// <param name="MairieId">Guid de la mairie</param>
+    /// <returns>Liste des events qui arrive</returns>
+    [HttpGet("GetEventComingByMairie/{MairieId}")]
+    public async Task<IActionResult> GetEventComingByMairie(Guid MairieId)
+    {
+        if (MairieId.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
+
+        try
+        {
+            GetEventComingByMairieCommand command = new GetEventComingByMairieCommand();
+            command.MairieId = MairieId;
+            List<EventEntity> eventEnt = await _mediator.Send(command);
+
+            return Ok(eventEnt);
+
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, "Internal server error.");
+        }
+    }
+
+    /// <summary>
+    /// fonction pour récupérer l'historique des events d'une mairie
+    /// </summary>
+    /// <param name="MairieId">Guid de la mairie</param>
+    /// <returns>Liste des events qui sont terminé</returns>
+    [HttpGet("GetEventHistoByMairie/{MairieId}")]
+    public async Task<IActionResult> GetEventHistoByMairie(Guid MairieId)
+    {
+        if (MairieId.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
+
+        try
+        {
+            GetEventHistoByMairieCommand command = new GetEventHistoByMairieCommand();
+            command.MairieId = MairieId;
+            List<EventEntity> eventEnt = await _mediator.Send(command);
+
+            return Ok(eventEnt);
+
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, "Internal server error.");
+        }
+    }
+
+    /// <summary>
+    /// fonction pour l'ajout d'un event
+    /// </summary>
+    /// <param name="command"></param>
+    /// <returns>code http Ok avec l'entité Event</returns>
     [HttpPost]
     public async Task<IActionResult> AddEvent([FromBody] AddEventCommand command)
     {
@@ -92,7 +182,12 @@ public class EventController : ApiControllerBase
         }
     }
 
-
+    /// <summary>
+    /// fonction pour la modification d'un event
+    /// </summary>
+    /// <param name="id">Id de l'event</param>
+    /// <param name="command"></param>
+    /// <returns>Code http Ok avec l'entité Event</returns>
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateEvent(int id, [FromBody] UpdateEventCommand command)
     {
@@ -122,6 +217,11 @@ public class EventController : ApiControllerBase
         }
     }
 
+    /// <summary>
+    /// fonction pour supprimer un event
+    /// </summary>
+    /// <param name="id">Id de l'event</param>
+    /// <returns>Code http</returns>
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteEvent(int id)
     {

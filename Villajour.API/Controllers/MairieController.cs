@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Villajour.Application.Commands.AddMairie;
-using Villajour.Application.Commands.DeleteMairie;
-using Villajour.Application.Commands.GetMairieById;
-using Villajour.Application.Commands.GetMairies;
-using Villajour.Application.Commands.UpdateMairie;
+using Villajour.Application.Commands.Mairies.AddMairie;
+using Villajour.Application.Commands.Mairies.DeleteMairie;
+using Villajour.Application.Commands.Mairies.GetMairieById;
+using Villajour.Application.Commands.Mairies.GetMairies;
+using Villajour.Application.Commands.Mairies.UpdateMairie;
 using Villajour.Domain.Common;
 
 namespace Villajour.API.Controllers;
