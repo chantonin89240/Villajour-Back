@@ -20,7 +20,9 @@ public class VilleajourDbContext : DbContext, IVilleajourDbContext
     public DbSet<DocumentTypeEntity> DocumentTypes => Set<DocumentTypeEntity>();
     public DbSet<EventEntity> Events => Set<EventEntity>();
     public DbSet<EventTypeEntity> EventTypes => Set<EventTypeEntity>();
-    public DbSet<FavoriteEntity> Favorites => Set<FavoriteEntity>();
+    public DbSet<FavoriteContentEntity> FavoritesContent => Set<FavoriteContentEntity>();
+    public DbSet<FavoriteMairieEntity> FavoritesMairie => Set<FavoriteMairieEntity>();
+
 
     public VilleajourDbContext(DbContextOptions<VilleajourDbContext> options) : base(options) { }
 
@@ -139,11 +141,39 @@ public class VilleajourDbContext : DbContext, IVilleajourDbContext
 
 
 
-        // configuration de Favorite
-        builder.Entity<FavoriteEntity>()
+        // configuration de FavoriteMairie
+        builder.Entity<FavoriteMairieEntity>()
             .HasOne<UserEntity>()
             .WithMany()
             .HasForeignKey(p => p.UserId);
+
+        builder.Entity<FavoriteMairieEntity>()
+           .HasOne<MairieEntity>()
+           .WithMany()
+           .HasForeignKey(p => p.MairieId);
+
+
+
+        // configuration de FavoriteContent
+        builder.Entity<FavoriteContentEntity>()
+            .HasOne<UserEntity>()
+            .WithMany()
+            .HasForeignKey(p => p.UserId);
+
+        builder.Entity<FavoriteContentEntity>()
+            .HasOne<AnnouncementEntity>()
+            .WithMany()
+            .HasForeignKey(p => p.AnnouncementId);
+
+        builder.Entity<FavoriteContentEntity>()
+            .HasOne<EventEntity>()
+            .WithMany()
+            .HasForeignKey(p => p.EventId);
+
+        builder.Entity<FavoriteContentEntity>()
+            .HasOne<DocumentEntity>()
+            .WithMany()
+            .HasForeignKey(p => p.DocumentId);
 
 
         base.OnModelCreating(builder);

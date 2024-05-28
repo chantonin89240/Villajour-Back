@@ -23,26 +23,23 @@ public class EventController : ApiControllerBase
         _mediator = mediator;
     }
 
-    // fonction pour récupérer les events favorit d'un utilisateur
-    [HttpGet("GetEventFavoriteByUser/{id}")]
-    public async Task<IActionResult> GetEventFavoriteByUser(Guid id)
+    /// <summary>
+    /// fonction pour récupérer les events favorit d'un utilisateur
+    /// </summary>
+    /// <param name="UserId"></param>
+    /// <returns>Liste des events que l'utilisateur a en favori</returns>
+    [HttpGet("GetEventFavoriteByUser/{UserId}")]
+    public async Task<IActionResult> GetEventFavoriteByUser(Guid UserId)
     {
-        if (id.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
+        if (UserId.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
 
         try
         {
-            GetMairieByIdCommand command = new GetMairieByIdCommand();
-            command.Id = id;
-            var eventEnt = await _mediator.Send(command);
+            GetEventByMairieCommand command = new GetEventByMairieCommand();
+            command.MairieId = UserId;
+            List<EventEntity> eventEnt = await _mediator.Send(command);
 
-            if (eventEnt != null)
-            {
-                return Ok(eventEnt);
-            }
-            else
-            {
-                return NotFound("La mairie n'existe pas !");
-            }
+            return Ok(eventEnt);
         }
         catch (Exception)
         {

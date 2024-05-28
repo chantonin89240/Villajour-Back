@@ -346,7 +346,7 @@ namespace Villajour.Persistence.Migrations
                     b.ToTable("EventTypes");
                 });
 
-            modelBuilder.Entity("Villajour.Domain.Common.FavoriteEntity", b =>
+            modelBuilder.Entity("Villajour.Domain.Common.FavoriteContentEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -355,9 +355,44 @@ namespace Villajour.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<int?>("AnnouncementId")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<int?>("DocumentId")
+                        .HasColumnType("int")
+                        .HasColumnOrder(4);
+
+                    b.Property<int?>("EventId")
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(1);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnnouncementId");
+
+                    b.HasIndex("DocumentId");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("FavoritesContent");
+                });
+
+            modelBuilder.Entity("Villajour.Domain.Common.FavoriteMairieEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
+
+                    b.Property<Guid>("MairieId")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnOrder(2);
 
                     b.Property<Guid>("UserId")
@@ -366,9 +401,11 @@ namespace Villajour.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MairieId");
+
                     b.HasIndex("UserId");
 
-                    b.ToTable("Favorites");
+                    b.ToTable("FavoritesMairie");
                 });
 
             modelBuilder.Entity("Villajour.Domain.Common.MairieEntity", b =>
@@ -539,8 +576,35 @@ namespace Villajour.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Villajour.Domain.Common.FavoriteEntity", b =>
+            modelBuilder.Entity("Villajour.Domain.Common.FavoriteContentEntity", b =>
                 {
+                    b.HasOne("Villajour.Domain.Common.AnnouncementEntity", null)
+                        .WithMany()
+                        .HasForeignKey("AnnouncementId");
+
+                    b.HasOne("Villajour.Domain.Common.DocumentEntity", null)
+                        .WithMany()
+                        .HasForeignKey("DocumentId");
+
+                    b.HasOne("Villajour.Domain.Common.EventEntity", null)
+                        .WithMany()
+                        .HasForeignKey("EventId");
+
+                    b.HasOne("Villajour.Domain.Common.UserEntity", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Villajour.Domain.Common.FavoriteMairieEntity", b =>
+                {
+                    b.HasOne("Villajour.Domain.Common.MairieEntity", null)
+                        .WithMany()
+                        .HasForeignKey("MairieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Villajour.Domain.Common.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")

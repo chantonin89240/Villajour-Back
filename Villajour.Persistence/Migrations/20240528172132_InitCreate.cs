@@ -291,19 +291,61 @@ namespace Villajour.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Favorites",
+                name: "FavoritesMairie",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MairieId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FavoritesMairie", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_FavoritesMairie_Mairies_MairieId",
+                        column: x => x.MairieId,
+                        principalTable: "Mairies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_FavoritesMairie_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FavoritesContent",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    AnnouncementId = table.Column<int>(type: "int", nullable: true),
+                    EventId = table.Column<int>(type: "int", nullable: true),
+                    DocumentId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Favorites", x => x.Id);
+                    table.PrimaryKey("PK_FavoritesContent", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Favorites_Users_UserId",
+                        name: "FK_FavoritesContent_Announcements_AnnouncementId",
+                        column: x => x.AnnouncementId,
+                        principalTable: "Announcements",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_FavoritesContent_Documents_DocumentId",
+                        column: x => x.DocumentId,
+                        principalTable: "Documents",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_FavoritesContent_Events_EventId",
+                        column: x => x.EventId,
+                        principalTable: "Events",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_FavoritesContent_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -371,8 +413,33 @@ namespace Villajour.Persistence.Migrations
                 column: "MairieId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Favorites_UserId",
-                table: "Favorites",
+                name: "IX_FavoritesContent_AnnouncementId",
+                table: "FavoritesContent",
+                column: "AnnouncementId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FavoritesContent_DocumentId",
+                table: "FavoritesContent",
+                column: "DocumentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FavoritesContent_EventId",
+                table: "FavoritesContent",
+                column: "EventId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FavoritesContent_UserId",
+                table: "FavoritesContent",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FavoritesMairie_MairieId",
+                table: "FavoritesMairie",
+                column: "MairieId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FavoritesMairie_UserId",
+                table: "FavoritesMairie",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -385,28 +452,19 @@ namespace Villajour.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Announcements");
-
-            migrationBuilder.DropTable(
                 name: "Appointments");
 
             migrationBuilder.DropTable(
                 name: "Contacts");
 
             migrationBuilder.DropTable(
-                name: "Documents");
+                name: "FavoritesContent");
 
             migrationBuilder.DropTable(
-                name: "Events");
-
-            migrationBuilder.DropTable(
-                name: "Favorites");
+                name: "FavoritesMairie");
 
             migrationBuilder.DropTable(
                 name: "ScheduleMairies");
-
-            migrationBuilder.DropTable(
-                name: "AnnouncementTypes");
 
             migrationBuilder.DropTable(
                 name: "AppointmentTypes");
@@ -415,13 +473,25 @@ namespace Villajour.Persistence.Migrations
                 name: "ContactTypes");
 
             migrationBuilder.DropTable(
+                name: "Announcements");
+
+            migrationBuilder.DropTable(
+                name: "Documents");
+
+            migrationBuilder.DropTable(
+                name: "Events");
+
+            migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "AnnouncementTypes");
+
+            migrationBuilder.DropTable(
                 name: "DocumentTypes");
 
             migrationBuilder.DropTable(
                 name: "EventTypes");
-
-            migrationBuilder.DropTable(
-                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Mairies");
