@@ -2,9 +2,9 @@
 
 namespace Villajour.Application.Commands.DeleteMairie;
 
-public class DeleteUserCommandValidator : AbstractValidator<DeleteMairieCommand>
+public class DeleteMairieCommandValidator : AbstractValidator<DeleteMairieCommand>
 {
-    public DeleteUserCommandValidator()
+    public DeleteMairieCommandValidator()
     {
         RuleFor(c => c.Id).NotEmpty();
     }

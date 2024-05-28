@@ -2,9 +2,9 @@
 
 namespace Villajour.Application.Commands.UpdateUser;
 
-public class deleteUserCommandValidator : AbstractValidator<UpdateUserCommand>
+public class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
 {
-    public deleteUserCommandValidator()
+    public UpdateUserCommandValidator()
     {
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.Phone).Matches("^[0-9]+$").MaximumLength(10);
