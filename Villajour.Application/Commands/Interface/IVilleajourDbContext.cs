@@ -20,7 +20,8 @@ namespace Villajour.Application.Commands.Interface
         DbSet<DocumentTypeEntity> DocumentTypes { get; }
         DbSet<EventEntity> Events { get; }
         DbSet<EventTypeEntity> EventTypes { get; }
-        DbSet<FavoriteEntity> Favorites { get; }
+        DbSet<FavoriteContentEntity> FavoritesContent { get; }
+        DbSet<FavoriteMairieEntity> FavoritesMairie { get; }
         DbSet<MairieEntity> Mairies { get; }
         DbSet<ScheduleMairieEntity> ScheduleMairies { get; }
         DbSet<UserEntity> Users { get; }

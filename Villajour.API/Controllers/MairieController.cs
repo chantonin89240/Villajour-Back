@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Villajour.Application.Commands.AddMairie;
-using Villajour.Application.Commands.DeleteMairie;
-using Villajour.Application.Commands.GetMairieById;
-using Villajour.Application.Commands.GetMairies;
-using Villajour.Application.Commands.UpdateMairie;
+using Villajour.Application.Commands.Mairies.AddMairie;
+using Villajour.Application.Commands.Mairies.DeleteMairie;
+using Villajour.Application.Commands.Mairies.GetMairieById;
+using Villajour.Application.Commands.Mairies.GetMairies;
+using Villajour.Application.Commands.Mairies.UpdateMairie;
 using Villajour.Domain.Common;
 
 namespace Villajour.API.Controllers;
@@ -21,6 +21,11 @@ public class MairieController : ApiControllerBase
         _mediator = mediator;
     }
 
+    /// <summary>
+    /// fonction pour récupérer la mairie grâce a sont id
+    /// </summary>
+    /// <param name="id">Identifiant Guid de la mairie</param>
+    /// <returns>Code http Ok et l'entité Mairie</returns>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetMairieById(Guid id)
     {
@@ -41,12 +46,16 @@ public class MairieController : ApiControllerBase
                 return NotFound("La mairie n'existe pas !");
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return StatusCode(500, "Internal server error.");
+            return StatusCode(500, ex.Message);
         }
     }
 
+    /// <summary>
+    /// fonction pour récupérer toutes les mairies
+    /// </summary>
+    /// <returns>Code http Ok et la liste des entités Mairie</returns>
     [HttpGet]
     public async Task<IActionResult> GetMairies()
     {
@@ -57,12 +66,17 @@ public class MairieController : ApiControllerBase
 
             return Ok(mairie);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return StatusCode(500, "Internal server error.");
+            return StatusCode(500, ex.Message);
         }
     }
 
+    /// <summary>
+    /// fonction pour ajouter une mairie
+    /// </summary>
+    /// <param name="command">Propriété de la command</param>
+    /// <returns>Code http Ok et l'entité Mairie</returns>
     [HttpPost]
     public async Task<IActionResult> AddMairie([FromBody] AddMairieCommand command)
     {
@@ -84,13 +98,18 @@ public class MairieController : ApiControllerBase
                 return NotFound("La mairie ne peut pas être ajouté");
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return StatusCode(500, "Internal server error.");
+            return StatusCode(500, ex.Message);
         }
     }
 
-
+    /// <summary>
+    /// fonction pour la modification d'une mairie
+    /// </summary>
+    /// <param name="id">Identifiant Guid de la mairie</param>
+    /// <param name="command">Propriété de la command</param>
+    /// <returns>Code http Ok et l'entité Mairie</returns>
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateMairie(Guid id, [FromBody] UpdateMairieCommand command)
     {
@@ -114,12 +133,17 @@ public class MairieController : ApiControllerBase
                 return NotFound("La mairie n'a pas pu être modifié !");
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return StatusCode(500, "Internal server error.");
+            return StatusCode(500, ex.Message);
         }
     }
 
+    /// <summary>
+    /// fonction pour la suppression d'une mairie
+    /// </summary>
+    /// <param name="id">Identifiant Guid de la mairie</param>
+    /// <returns>Code http Ok</returns>
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteMairie(Guid id)
     {
@@ -140,9 +164,9 @@ public class MairieController : ApiControllerBase
                 return StatusCode(400, "La mairie n'existe pas !");
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return StatusCode(500, "Internal server error.");
+            return StatusCode(500, ex.Message);
         }
     }
 }
