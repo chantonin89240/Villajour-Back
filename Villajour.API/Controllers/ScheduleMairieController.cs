@@ -8,6 +8,11 @@ namespace Villajour.API.Controllers;
 [Route("api/[controller]")]
 public class ScheduleMairieController : ApiControllerBase
 {
+    /// <summary>
+    /// fonction pour l'ajout des horaires de la mairie
+    /// </summary>
+    /// <param name="command">Propriété de la command</param>
+    /// <returns>Code http Ok et l'entité ScheduleMairie</returns>
     [HttpPost]
     public async Task<IActionResult> AddSchedule([FromBody] AddScheduleMairieCommand command)
     {
@@ -29,9 +34,9 @@ public class ScheduleMairieController : ApiControllerBase
                 return NotFound("L'horaire de la mairie ne peut pas être ajouté");
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return StatusCode(500, "Internal server error.");
+            return StatusCode(500, ex.Message);
         }
     }
 }

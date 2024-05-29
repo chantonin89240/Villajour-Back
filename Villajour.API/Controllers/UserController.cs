@@ -20,6 +20,11 @@ public class UserController : ApiControllerBase
         _mediator = mediator;
     }
 
+    /// <summary>
+    /// fonction pour récupéré un utilisateur avec sont id
+    /// </summary>
+    /// <param name="id">Identifiant Guid de l'utilisateur</param>
+    /// <returns>l'entité User</returns>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetUserById(Guid id)
     {
@@ -40,13 +45,17 @@ public class UserController : ApiControllerBase
                 return NotFound("L'utilisateur n'existe pas !");
             }
         }
-        catch (Exception)
+        catch(Exception ex)
         {
-            return StatusCode(500, "Internal server error.");
+            return StatusCode(500, ex.Message);
         }
     }
 
-
+    /// <summary>
+    /// fonction pour ajouter un utilisateur
+    /// </summary>
+    /// <param name="command">Propriété de la command</param>
+    /// <returns>Code http Ok avec l'entité User</returns>
     [HttpPost]
     public async Task<IActionResult> AddUser([FromBody] AddUserCommand command)
     {
@@ -68,12 +77,18 @@ public class UserController : ApiControllerBase
                 return NotFound("L'utilisateur ne peut pas être ajouté");
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return StatusCode(500, "Internal server error.");
+            return StatusCode(500, ex.Message);
         }
     }
 
+    /// <summary>
+    /// fonction pour mettre à jour un utilisateur
+    /// </summary>
+    /// <param name="id">Identifiant Guid de l'utilisateur</param>
+    /// <param name="command">Propriété de la command</param>
+    /// <returns>Code http Ok avec l'entité User</returns>
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UpdateUserCommand command)
     {
@@ -97,12 +112,17 @@ public class UserController : ApiControllerBase
                 return NotFound("L'utilisateur n'a pas pu être modifié !");
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return StatusCode(500, "Internal server error.");
+            return StatusCode(500, ex.Message);
         }
     }
 
+    /// <summary>
+    /// fonction pour supprimer un utilisateur
+    /// </summary>
+    /// <param name="id">Identifiant Guid de l'utilisateur</param>
+    /// <returns>Code http Ok</returns>
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteUser(Guid id)
     {
@@ -123,9 +143,9 @@ public class UserController : ApiControllerBase
                 return StatusCode(400, "L'utilisateur n'existe pas !");
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return StatusCode(500, "Internal server error.");
+            return StatusCode(500, ex.Message);
         }
     }
 }

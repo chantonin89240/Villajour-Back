@@ -386,10 +386,12 @@ namespace Villajour.Persistence.Migrations
 
             modelBuilder.Entity("Villajour.Domain.Common.FavoriteMairieEntity", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnOrder(0);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<Guid>("MairieId")
                         .HasColumnType("uniqueidentifier")

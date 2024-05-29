@@ -21,7 +21,14 @@ public class GetEventFavoriteByUserCommandHandler : IRequestHandler<GetEventFavo
 
     public async Task<List<EventEntity?>> Handle(GetEventFavoriteByUserCommand request, CancellationToken cancellationToken)
     {
-        List<EventEntity> entity = await _context.Events.OrderByDescending(e => e.EndTime).ToListAsync(cancellationToken);
+        List<EventEntity> entity = await _context.Events
+            .Where(e => _context.FavoritesContent
+                .Where(f => f.UserId == request.UserId && f.EventId.HasValue)
+                .Select(f => f.EventId.Value)
+                .Contains(e.Id)
+            && e.EndTime >= DateTime.Now)
+            .OrderBy(e => e.StartTime)
+            .ToListAsync(cancellationToken);
 
         return entity;
     }

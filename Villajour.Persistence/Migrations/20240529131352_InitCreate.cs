@@ -294,7 +294,8 @@ namespace Villajour.Persistence.Migrations
                 name: "FavoritesMairie",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MairieId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },

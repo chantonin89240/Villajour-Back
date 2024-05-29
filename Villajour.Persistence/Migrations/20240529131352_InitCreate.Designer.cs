@@ -12,7 +12,7 @@ using Villajour.Persistence;
 namespace Villajour.Persistence.Migrations
 {
     [DbContext(typeof(VilleajourDbContext))]
-    [Migration("20240528172132_InitCreate")]
+    [Migration("20240529131352_InitCreate")]
     partial class InitCreate
     {
         /// <inheritdoc />
@@ -389,10 +389,12 @@ namespace Villajour.Persistence.Migrations
 
             modelBuilder.Entity("Villajour.Domain.Common.FavoriteMairieEntity", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnOrder(0);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<Guid>("MairieId")
                         .HasColumnType("uniqueidentifier")
