@@ -28,6 +28,7 @@ public class AddEventCommandHandler : IRequestHandler<AddEventCommand, EventEnti
     {
         var entity = new EventEntity
         {
+            StartTime = request.StartTime,
             EndTime = request.EndTime,
             Address = request.Address,
             Title = request.Title,

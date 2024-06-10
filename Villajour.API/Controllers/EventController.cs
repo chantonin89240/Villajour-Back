@@ -52,7 +52,7 @@ public class EventController : ApiControllerBase
     /// fonction pour récupérer tous les events de toutes les mairies qu'un utilisateur a en favorit
     /// </summary>
     /// <param name="UserId">Identifiant Guid du user</param>
-    /// <returns></returns>
+    /// <returns>Dto EventByMairieFavorite</returns>
     [HttpGet("GetEventByMairieFavorite/{UserId}")]
     public async Task<IActionResult> GetEventByMairieFavorite(Guid UserId)
     {
