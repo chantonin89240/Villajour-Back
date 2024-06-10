@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Packages.props = Directory.Packages.props
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Villajour.UnitTest", "Villajour.UnitTest\Villajour.UnitTest.csproj", "{129E7245-4485-42B1-8ACD-BE6BDC8DCC5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{D6934255-A845-4871-8C04-70BE5D816629}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6934255-A845-4871-8C04-70BE5D816629}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6934255-A845-4871-8C04-70BE5D816629}.Release|Any CPU.Build.0 = Release|Any CPU
+		{129E7245-4485-42B1-8ACD-BE6BDC8DCC5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{129E7245-4485-42B1-8ACD-BE6BDC8DCC5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{129E7245-4485-42B1-8ACD-BE6BDC8DCC5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{129E7245-4485-42B1-8ACD-BE6BDC8DCC5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
