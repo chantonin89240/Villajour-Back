@@ -2,8 +2,6 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using Villajour.Application.Commands.Interface;
-using Villajour.Application.Common;
 using Villajour.Application.Common.Behaviors;
 
 namespace Villajour.Application;
@@ -21,8 +19,6 @@ public static class DependencyInjection
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
         });
-
-        services.AddScoped<IAppointmentService, AppointmentService>();
 
         return services;
     }

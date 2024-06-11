@@ -1,13 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Villajour.Domain.Common;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Villajour.Persistence.Interfaces;
-using Villajour.Application.Common.Interfaces;
+using Villajour.Application.Interfaces;
 
 namespace Villajour.Persistence.Repositories
 {
-    public class AppointmentRepository : Application.Common.Interfaces.IAppointmentRepository
+    public class AppointmentRepository : IAppointmentRepository
     {
         private readonly VilleajourDbContext _context;
 
