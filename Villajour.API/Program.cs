@@ -1,5 +1,5 @@
+using Villajour.API.Extensions;
 using Villajour.API.Helpers;
-using Villajour.Application;
 using Villajour.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,8 +11,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
-builder.Services.AddApplicationServices();
-builder.Services.AddPersistenceServices(builder.Configuration);
+builder.RegisterConfiguration();
+builder.RegisterServices();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 

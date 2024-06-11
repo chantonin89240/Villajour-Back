@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Villajour.Persistence.Interfaces
+namespace Villajour.Application.Interfaces
 {
     public interface IAppointmentRepository
     {
