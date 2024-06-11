@@ -12,8 +12,8 @@ using Villajour.Persistence;
 namespace Villajour.Persistence.Migrations
 {
     [DbContext(typeof(VilleajourDbContext))]
-    [Migration("20240529131352_InitCreate")]
-    partial class InitCreate
+    [Migration("20240611134031_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
