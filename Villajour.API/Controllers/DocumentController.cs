@@ -6,9 +6,8 @@ using Villajour.Application.Commands.Documents.DeleteDocument;
 using Villajour.Application.Commands.Documents.GetDocumentByFavoriteMairie;
 using Villajour.Application.Commands.Documents.GetDocumentFav;
 using Villajour.Application.Commands.Documents.GetDocumentHistoByMairie;
-using Villajour.Application.Commands.Events.GetEventByMairieFavorite;
-using Villajour.Application.Commands.Mairies.DeleteMairie;
-using Villajour.Application.Commands.Mairies.GetMairieById;
+using Villajour.Application.Commands.Documents.GetDocumentType;
+using Villajour.Application.Commands.Dto;
 using Villajour.Domain.Common;
 
 namespace Villajour.API.Controllers;
@@ -163,7 +162,7 @@ public class DocumentController : ApiControllerBase
         {
             GetDocumentHistoByMairieCommand command = new GetDocumentHistoByMairieCommand();
             command.MairieId = MairieId;
-            List<DocumentEntity> Document = await _mediator.Send(command);
+            List<DocumentDto> Document = await _mediator.Send(command);
 
             if (Document != null)
             {
@@ -173,6 +172,27 @@ public class DocumentController : ApiControllerBase
             {
                 return NotFound("La mairie n'existe pas !");
             }
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// fonction pour la liste des types de document
+    /// </summary>
+    /// <param></param>
+    /// <returns>Code http Ok et liste de type de document</returns>
+    [HttpGet("GetDocumentType")]
+    public async Task<IActionResult> GetDocumentType()
+    {
+        try
+        {
+            GetDocumentTypeCommand command = new GetDocumentTypeCommand();
+            List<DocumentTypeEntity> DocumentType = await Mediator.Send(command);
+
+            return Ok(DocumentType);
         }
         catch (Exception ex)
         {
