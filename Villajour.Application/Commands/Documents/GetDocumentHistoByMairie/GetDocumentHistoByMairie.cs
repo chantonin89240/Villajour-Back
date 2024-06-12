@@ -32,7 +32,7 @@ public class GetDocumentHistoByMairieHandler : IRequestHandler<GetDocumentHistoB
             Date = ddt.Document.Date,
             Title = ddt.Document.Title,
             Description = ddt.Document.Description,
-            Document = ddt.Document.Document,
+            DocumentUrl = ddt.Document.DocumentUrl,
             DocumentType = new DocumentTypeEntity
             {
                 Id = ddt.DocumentType.Id,

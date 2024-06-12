@@ -9,6 +9,7 @@ using Villajour.Application.Commands.Documents.GetDocumentHistoByMairie;
 using Villajour.Application.Commands.Documents.GetDocumentType;
 using Villajour.Application.Commands.Dto;
 using Villajour.Domain.Common;
+using Azure.Storage.Blobs;
 
 namespace Villajour.API.Controllers;
 
@@ -17,10 +18,12 @@ namespace Villajour.API.Controllers;
 public class DocumentController : ApiControllerBase
 {
     private readonly IMediator _mediator;
+    private IConfiguration configuration;
 
-    public DocumentController(IMediator mediator)
+    public DocumentController(IMediator mediator, IConfiguration configuration)
     {
-        _mediator = mediator;
+        this._mediator = mediator;
+        this.configuration = configuration;
     }
 
     /// <summary>
@@ -29,16 +32,37 @@ public class DocumentController : ApiControllerBase
     /// <param name="command">Propriété de la command</param>
     /// <returns>Code http Ok et l'entité Document</returns>
     [HttpPost]
-    public async Task<IActionResult> AddDocument([FromBody] AddDocumentCommand command)
+    public async Task<IActionResult> AddDocument([FromForm] AddDocumentDto command)
     {
         if (command == null)
         {
             return BadRequest("Command cannot be null.");
         }
 
+        var connectionString = configuration["storage:connectionString"];
+        var containerName = configuration["storage:containerName"];
+        var blobServiceClient = new BlobServiceClient(connectionString);
+        var blobContainerClient = blobServiceClient.GetBlobContainerClient(containerName);
+
+        await blobContainerClient.CreateIfNotExistsAsync();
+
+        var blobClient = blobContainerClient.GetBlobClient(command.Document.FileName);
+
+        using (var stream = command.Document.OpenReadStream())
+        {
+            await blobClient.UploadAsync(stream, overwrite: true);
+        }
+
+        AddDocumentCommand DocumentCommand = new AddDocumentCommand();
+        DocumentCommand.Title = command.Title;
+        DocumentCommand.Description = command.Description;
+        DocumentCommand.DocumentUrl = blobClient.Uri.ToString();
+        DocumentCommand.DocumentTypeId = command.DocumentTypeId;
+        DocumentCommand.MairieId = command.MairieId;
+
         try
         {
-            DocumentEntity document = await _mediator.Send(command);
+            DocumentEntity document = await _mediator.Send(DocumentCommand);
 
             if (document != null)
             {
