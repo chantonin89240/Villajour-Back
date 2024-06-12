@@ -13,9 +13,8 @@ public class AddDocumentCommandValidator : AbstractValidator<AddDocumentCommand>
 {
     public AddDocumentCommandValidator()
     {
-        RuleFor(c => c.Date).NotEmpty();
         RuleFor(c => c.Title).NotEmpty();
-        RuleFor(c => c.Document).NotEmpty();
+        RuleFor(c => c.DocumentUrl).NotEmpty();
         RuleFor(c => c.DocumentTypeId).NotEmpty();
         RuleFor(c => c.MairieId).NotEmpty();
     }

@@ -234,9 +234,9 @@ namespace Villajour.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnOrder(3);
 
-                    b.Property<byte[]>("Document")
+                    b.Property<byte[]>("DocumentUrl")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnOrder(4);
 
                     b.Property<int>("DocumentTypeId")

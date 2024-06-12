@@ -23,7 +23,7 @@ public class DocumentEntity
 
     [Required]
     [Column(Order = 4)]
-    public byte[]? Document { get; set; }
+    public string? DocumentUrl { get; set; }
 
     [Required]
     [Column(Order = 5)]
