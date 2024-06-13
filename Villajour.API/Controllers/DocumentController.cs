@@ -10,6 +10,7 @@ using Villajour.Application.Commands.Documents.GetDocumentType;
 using Villajour.Application.Commands.Dto;
 using Villajour.Domain.Common;
 using Azure.Storage.Blobs;
+using Azure.Storage;
 
 namespace Villajour.API.Controllers;
 
@@ -217,6 +218,33 @@ public class DocumentController : ApiControllerBase
             List<DocumentTypeEntity> DocumentType = await Mediator.Send(command);
 
             return Ok(DocumentType);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// Fonction pour télécharger le document
+    /// </summary>
+    /// <param name="fileUrl">Url du conteneur azure</param>
+    /// <returns>le document</returns>
+    [HttpGet("DownloadDocument")]
+    public async Task<IActionResult> DownloadDocument(string fileUrl)
+    {
+        if (string.IsNullOrEmpty(fileUrl))
+        {
+            return BadRequest("Url du document vide.");
+        }
+
+        var blobUri = new Uri(fileUrl);
+        var blobClient = new BlobClient(blobUri, new StorageSharedKeyCredential(configuration["storage:accountName"], configuration["storage:key"]));
+
+        try
+        {
+            var downloadInfo = await blobClient.DownloadAsync();
+            return File(downloadInfo.Value.Content, downloadInfo.Value.ContentType, blobClient.Name);
         }
         catch (Exception ex)
         {
