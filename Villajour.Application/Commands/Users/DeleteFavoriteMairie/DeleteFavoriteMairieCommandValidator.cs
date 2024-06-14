@@ -6,7 +6,8 @@ public class DeleteFavoriteMairieCommandValidator : AbstractValidator<DeleteFavo
 {
     public DeleteFavoriteMairieCommandValidator()
     {
-        RuleFor(c => c.Id).NotEmpty();
+        RuleFor(c => c.UserId).NotEmpty();
+        RuleFor(c => c.MairieId).NotEmpty();
     }
 }
 

@@ -1,12 +1,16 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Villajour.Application.Commands.Interface;
+using Villajour.Domain.Common;
 
 namespace Villajour.Application.Commands.Users.DeleteFavoriteContent;
 
 public record class DeleteFavoriteContentCommand : IRequest<bool>
 {
-    public int Id { get; set; }
+    public Guid UserId { get; set; }
+    public int? AnnouncementId { get; set; }
+    public int? EventId { get; set; }
+    public int? DocumentId { get; set; }
 }
 
 public class DeleteFavoriteContentCommandHandler : IRequestHandler<DeleteFavoriteContentCommand, bool>
@@ -20,18 +24,36 @@ public class DeleteFavoriteContentCommandHandler : IRequestHandler<DeleteFavorit
 
     public async Task<bool> Handle(DeleteFavoriteContentCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.FavoritesContent.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
-
-        if (entity != null)
+        if (request.UserId != Guid.Empty)
         {
-            _context.FavoritesContent.Remove(entity);
-            await _context.SaveChangesAsync(cancellationToken);
-            return true;
+            FavoriteContentEntity entity;
+            if (request.AnnouncementId.HasValue)
+            {
+                entity = await _context.FavoritesContent.FirstOrDefaultAsync(x => x.UserId == request.UserId && x.AnnouncementId == request.AnnouncementId, cancellationToken);
+            }
+            else if (request.EventId.HasValue)
+            {
+                entity = await _context.FavoritesContent.FirstOrDefaultAsync(x => x.UserId == request.UserId && x.EventId == request.EventId, cancellationToken);
+            }
+            else 
+            {
+                entity = await _context.FavoritesContent.FirstOrDefaultAsync(x => x.UserId == request.UserId && x.DocumentId == request.DocumentId, cancellationToken);
+            }
+
+            if (entity != null)
+            {
+                _context.FavoritesContent.Remove(entity);
+                await _context.SaveChangesAsync(cancellationToken);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         else
         {
             return false;
         }
-
     }
 }
