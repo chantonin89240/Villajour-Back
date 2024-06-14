@@ -40,9 +40,9 @@ jobs:
         projects: '**/*.UnitTest.csproj'
         arguments: '--configuration $(buildConfiguration)'
 
-    #- task: QodanaScan@2024
-    #  env:
-    #    QODANA_TOKEN: $(QODANA_TOKEN)
+    - task: QodanaScan@2024
+      env:
+        QODANA_TOKEN: $(QODANA_TOKEN)
 
     - task: DotNetCoreCLI@2
       inputs:
