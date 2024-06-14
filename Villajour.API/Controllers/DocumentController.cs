@@ -156,7 +156,7 @@ public class DocumentController : ApiControllerBase
         {
             GetDocumentFavCommand command = new GetDocumentFavCommand();
             command.UserId = UserId;
-            List<DocumentEntity> document = await _mediator.Send(command);
+            List<DocumentDto> document = await _mediator.Send(command);
 
             if (document != null)
             {

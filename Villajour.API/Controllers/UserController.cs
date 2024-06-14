@@ -1,7 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Villajour.Application.Commands.Users.AddFavoriteContent;
+using Villajour.Application.Commands.Users.AddFavoriteMairie;
 using Villajour.Application.Commands.Users.AddUser;
+using Villajour.Application.Commands.Users.DeleteFavoriteContent;
+using Villajour.Application.Commands.Users.DeleteFavoriteMairie;
 using Villajour.Application.Commands.Users.DeleteUser;
 using Villajour.Application.Commands.Users.GetUserById;
 using Villajour.Application.Commands.Users.UpdateUser;
@@ -148,4 +152,131 @@ public class UserController : ApiControllerBase
             return StatusCode(500, ex.Message);
         }
     }
+
+    /// <summary>
+    /// fonction pour ajouter un favoris
+    /// </summary>
+    /// <param name="command">Propriété de la command</param>
+    /// <returns>Code http Ok</returns>
+    [HttpPost("AddFavoriteContent")]
+    public async Task<IActionResult> AddFavoriteContent([FromBody] AddFavoriteContentCommand command)
+    {
+        if (command == null)
+        {
+            return BadRequest("Command cannot be null.");
+        }
+
+        try
+        {
+            FavoriteContentEntity favoris = await _mediator.Send(command);
+
+            if (favoris != null)
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound("L'utilisateur ne peut pas être ajouté");
+            }
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// fonction pour ajouter une mairie favoris
+    /// </summary>
+    /// <param name="command">Propriété de la command</param>
+    /// <returns>Code http Ok</returns>
+    [HttpPost("AddFavoriteMairie")]
+    public async Task<IActionResult> AddFavoriteMairie([FromBody] AddFavoriteMairieCommand command)
+    {
+        if (command == null)
+        {
+            return BadRequest("Command cannot be null.");
+        }
+
+        try
+        {
+            FavoriteMairieEntity favoris = await _mediator.Send(command);
+
+            if (favoris != null)
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound("L'utilisateur ne peut pas être ajouté");
+            }
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// fonction pour supprimer un favoris
+    /// </summary>
+    /// <param name="id">Identifiant int du FavorisContent</param>
+    /// <returns>Code http Ok</returns>
+    [HttpDelete("DeleteFavoriteContent/{id}")]
+    public async Task<IActionResult> DeleteFavoriteContent(int id)
+    {
+        if (id.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
+
+        try
+        {
+            DeleteFavoriteContentCommand command = new DeleteFavoriteContentCommand();
+            command.Id = id;
+            bool user = await _mediator.Send(command);
+
+            if (user)
+            {
+                return Ok();
+            }
+            else
+            {
+                return StatusCode(400, "L'utilisateur n'existe pas !");
+            }
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// fonction pour supprimer une mairie favoris
+    /// </summary>
+    /// <param name="id">Identifiant int du FavorisMairie</param>
+    /// <returns>Code http Ok</returns>
+    [HttpDelete("DeleteFavoriteMairie/{id}")]
+    public async Task<IActionResult> DeleteFavoriteMairie(int id)
+    {
+        if (id.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
+
+        try
+        {
+            DeleteFavoriteMairieCommand command = new DeleteFavoriteMairieCommand();
+            command.Id = id;
+            bool user = await _mediator.Send(command);
+
+            if (user)
+            {
+                return Ok();
+            }
+            else
+            {
+                return StatusCode(400, "L'utilisateur n'existe pas !");
+            }
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
 }
