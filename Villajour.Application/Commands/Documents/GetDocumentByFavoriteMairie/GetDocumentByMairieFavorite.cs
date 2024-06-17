@@ -22,25 +22,31 @@ public class GetDocumentByMairieFavoriteHandler : IRequestHandler<GetDocumentByM
 
     public async Task<List<DocumentByMairieFavoriteDto?>> Handle(GetDocumentByMairieFavoriteCommand request, CancellationToken cancellationToken)
     {
-        List<DocumentByMairieFavoriteDto> entity = await _context.FavoritesMairie
-            .Where(f => f.UserId == request.UserId)
-            .Join(_context.Mairies, f => f.MairieId, m => m.Id, (f, m) => new { FavoriteMairie = f, Mairie = m })
-            .Join(_context.Documents, fm => fm.Mairie.Id, e => e.MairieId,
-                  (fm, e) => new DocumentByMairieFavoriteDto
-                  {
-                      Mairie = fm.Mairie,
-                      DocumentList = new List<DocumentEntity> { e }
-                  })
-            .GroupBy(e => e.Mairie.Id)
-            .Select(g => new DocumentByMairieFavoriteDto
-            {
-                Mairie = g.First().Mairie,
-                DocumentList = g.Select(e => e.DocumentList.First()).ToList()
-            })
-            .ToListAsync(cancellationToken);
-
+        List<DocumentByMairieFavoriteDto> entity = await (from fm in _context.FavoritesMairie
+                                                          join m in _context.Mairies on fm.MairieId equals m.Id
+                                                          join d in _context.Documents on m.Id equals d.MairieId
+                                                          join dt in _context.DocumentTypes on d.DocumentTypeId equals dt.Id
+                                                          where fm.UserId == request.UserId
+                                                          select new DocumentByMairieFavoriteDto
+                                                          {
+                                                              Id = d.Id,
+                                                              Date = d.Date,
+                                                              Title = d.Title,
+                                                              Description = d.Description,
+                                                              DocumentUrl = d.DocumentUrl,
+                                                              DocumentType = new DocumentTypeEntity
+                                                              {
+                                                                  Id = dt.Id,
+                                                                  Libelle = dt.Libelle
+                                                              },
+                                                              Mairie = m,
+                                                              Favorite = _context.FavoritesContent.Any(fc => fc.UserId == request.UserId && fc.DocumentId == d.Id)
+                                                          })
+                                                        .ToListAsync(cancellationToken);
 
         return entity;
+
+
     }
 }
 
