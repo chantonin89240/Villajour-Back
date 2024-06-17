@@ -7,7 +7,8 @@ namespace Villajour.Application.Commands.Users.DeleteFavoriteMairie;
 
 public record class DeleteFavoriteMairieCommand : IRequest<bool>
 {
-    public int Id { get; set; }
+    public Guid UserId { get; set; }
+    public Guid MairieId { get; set; }
 }
 
 public class DeleteFavoriteMairieCommandHandler : IRequestHandler<DeleteFavoriteMairieCommand, bool>
@@ -21,7 +22,7 @@ public class DeleteFavoriteMairieCommandHandler : IRequestHandler<DeleteFavorite
 
     public async Task<bool> Handle(DeleteFavoriteMairieCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.FavoritesMairie.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+        var entity = await _context.FavoritesMairie.FirstOrDefaultAsync(x => x.UserId == request.UserId && x.MairieId == request.MairieId, cancellationToken);
 
         if (entity != null)
         {

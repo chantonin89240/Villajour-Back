@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Villajour.Application.Commands.Dto;
 using Villajour.Application.Commands.Users.AddFavoriteContent;
 using Villajour.Application.Commands.Users.AddFavoriteMairie;
 using Villajour.Application.Commands.Users.AddUser;
@@ -217,29 +218,36 @@ public class UserController : ApiControllerBase
         }
     }
 
+
     /// <summary>
     /// fonction pour supprimer un favoris
     /// </summary>
-    /// <param name="id">Identifiant int du FavorisContent</param>
+    /// <param name="command">Dto de la command</param>
     /// <returns>Code http Ok</returns>
-    [HttpDelete("DeleteFavoriteContent/{id}")]
-    public async Task<IActionResult> DeleteFavoriteContent(int id)
+    [HttpDelete("DeleteFavoriteContent")]
+    public async Task<IActionResult> DeleteFavoriteContent([FromBody] DeleteFavoriteContentDto command)
     {
-        if (id.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
+        if(command == null)
+        {
+            return BadRequest("Command cannot be null.");
+        }
 
         try
         {
-            DeleteFavoriteContentCommand command = new DeleteFavoriteContentCommand();
-            command.Id = id;
-            bool user = await _mediator.Send(command);
+            DeleteFavoriteContentCommand commandExec = new DeleteFavoriteContentCommand();
+            commandExec.UserId = command.UserId;
+            commandExec.DocumentId = command.DocumentId;
+            commandExec.AnnouncementId = command.AnnouncementId;
+            commandExec.EventId = command.EventId;
+            bool fav = await _mediator.Send(commandExec);
 
-            if (user)
+            if (fav)
             {
                 return Ok();
             }
             else
             {
-                return StatusCode(400, "L'utilisateur n'existe pas !");
+                return StatusCode(400, "Le favoris n'existe pas !");
             }
         }
         catch (Exception ex)
@@ -251,26 +259,30 @@ public class UserController : ApiControllerBase
     /// <summary>
     /// fonction pour supprimer une mairie favoris
     /// </summary>
-    /// <param name="id">Identifiant int du FavorisMairie</param>
+    /// <param name="command">Dto de la command</param>
     /// <returns>Code http Ok</returns>
-    [HttpDelete("DeleteFavoriteMairie/{id}")]
-    public async Task<IActionResult> DeleteFavoriteMairie(int id)
+    [HttpDelete("DeleteFavoriteMairie")]
+    public async Task<IActionResult> DeleteFavoriteMairie([FromBody] DeleteFavoriteMairieDto command)
     {
-        if (id.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
+        if (command == null)
+        {
+            return BadRequest("Command cannot be null.");
+        }
 
         try
         {
-            DeleteFavoriteMairieCommand command = new DeleteFavoriteMairieCommand();
-            command.Id = id;
-            bool user = await _mediator.Send(command);
+            DeleteFavoriteMairieCommand commandExec = new DeleteFavoriteMairieCommand();
+            commandExec.UserId = command.UserId;
+            commandExec.MairieId = command.MairieId;
+            bool fav = await _mediator.Send(commandExec);
 
-            if (user)
+            if (fav)
             {
                 return Ok();
             }
             else
             {
-                return StatusCode(400, "L'utilisateur n'existe pas !");
+                return StatusCode(400, "Le favoris n'existe pas !");
             }
         }
         catch (Exception ex)
@@ -278,5 +290,4 @@ public class UserController : ApiControllerBase
             return StatusCode(500, ex.Message);
         }
     }
-
 }

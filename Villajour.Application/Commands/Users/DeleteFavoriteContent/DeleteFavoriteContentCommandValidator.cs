@@ -6,6 +6,6 @@ public class DeleteFavoriteContentCommandValidator : AbstractValidator<DeleteFav
 {
     public DeleteFavoriteContentCommandValidator()
     {
-        RuleFor(c => c.Id).NotEmpty();
+        RuleFor(c => c.UserId).NotEmpty();
     }
 }
