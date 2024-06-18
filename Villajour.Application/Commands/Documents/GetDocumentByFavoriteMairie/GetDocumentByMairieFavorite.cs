@@ -8,7 +8,7 @@ namespace Villajour.Application.Commands.Documents.GetDocumentByFavoriteMairie;
 
 public record class GetDocumentByMairieFavoriteCommand : IRequest<List<DocumentByMairieFavoriteDto>>
 {
-public Guid UserId { get; set; }
+    public Guid UserId { get; set; }
 }
 
 public class GetDocumentByMairieFavoriteHandler : IRequestHandler<GetDocumentByMairieFavoriteCommand, List<DocumentByMairieFavoriteDto>>
