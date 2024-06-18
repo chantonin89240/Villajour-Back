@@ -27,4 +27,12 @@ public class MairieEntity
     [Required]
     [Column(Order = 4)]
     public string? Address { get; set; }
+
+    [Required]
+    [Column(Order = 5)]
+    public string? Name { get; set; }
+
+    [Required]
+    [Column(Order = 6)]
+    public string? Email { get; set; }
 }
