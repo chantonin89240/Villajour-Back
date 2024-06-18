@@ -11,6 +11,7 @@ using Villajour.Application.Commands.Dto;
 using Villajour.Domain.Common;
 using Azure.Storage.Blobs;
 using Azure.Storage;
+using Villajour.Application.Commands.Documents.GetDocumentByMairieDetail;
 
 namespace Villajour.API.Controllers;
 
@@ -133,7 +134,7 @@ public class DocumentController : ApiControllerBase
             }
             else
             {
-                return NotFound("Le user n'existe pas !");
+                return NotFound("L'utilisateur n'existe pas !");
             }
         }
         catch (Exception ex)
@@ -164,7 +165,7 @@ public class DocumentController : ApiControllerBase
             }
             else
             {
-                return NotFound("Le user n'existe pas !");
+                return NotFound("L'utilisateur n'existe pas !");
             }
         }
         catch (Exception ex)
@@ -245,6 +246,39 @@ public class DocumentController : ApiControllerBase
         {
             var downloadInfo = await blobClient.DownloadAsync();
             return File(downloadInfo.Value.Content, downloadInfo.Value.ContentType, blobClient.Name);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// fonction pour récupérer les documents d'une mairie
+    /// </summary>
+    /// <param name="id">Identifiant Guid de la mairie</param>
+    /// <returns>Code http Ok et liste de document</returns>
+    [HttpGet("GetDocumentByMairieDetail/{UserId}/{MairieId}")]
+    public async Task<IActionResult> GetDocumentByMairieDetail(Guid UserId, Guid MairieId)
+    {
+        if (MairieId.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
+        if (MairieId.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
+
+        try
+        {
+            GetDocumentByMairieDetailCommand command = new GetDocumentByMairieDetailCommand();
+            command.UserId = UserId;
+            command.MairieId = MairieId;
+            List<DocumentByMairieDetailDto> document = await Mediator.Send(command);
+
+            if (document != null)
+            {
+                return Ok(document);
+            }
+            else
+            {
+                return NotFound("il n'y a pas de document");
+            }
         }
         catch (Exception ex)
         {
