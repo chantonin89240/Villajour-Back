@@ -8,7 +8,7 @@ using Villajour.Domain.Common;
 
 namespace Villajour.Application.Commands.Interface
 {
-    public interface IVilleajourDbContext
+    public interface IVillajourDbContext
     {
         DbSet<AnnouncementEntity> Announcements { get; }
         DbSet<AnnouncementTypeEntity> AnnouncementTypes { get; }

@@ -14,9 +14,9 @@ public record class AddScheduleMairieCommand : IRequest<ScheduleMairieEntity>
 
 public class AddScheduleMairieCommandHandler : IRequestHandler<AddScheduleMairieCommand, ScheduleMairieEntity>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public AddScheduleMairieCommandHandler(IVilleajourDbContext context)
+    public AddScheduleMairieCommandHandler(IVillajourDbContext context)
     {
         _context = context;
     }

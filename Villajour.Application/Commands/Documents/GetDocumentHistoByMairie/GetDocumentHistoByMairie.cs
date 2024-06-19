@@ -13,9 +13,9 @@ public record class GetDocumentHistoByMairieCommand : IRequest<List<DocumentDto>
 
 public class GetDocumentHistoByMairieHandler : IRequestHandler<GetDocumentHistoByMairieCommand, List<DocumentDto>>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public GetDocumentHistoByMairieHandler(IVilleajourDbContext context)
+    public GetDocumentHistoByMairieHandler(IVillajourDbContext context)
     {
         _context = context;
     }

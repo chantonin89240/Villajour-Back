@@ -16,9 +16,9 @@ public record class AddMairieCommand : IRequest<MairieEntity>
 
 public class AddMairieCommandHandler : IRequestHandler<AddMairieCommand, MairieEntity>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public AddMairieCommandHandler(IVilleajourDbContext context)
+    public AddMairieCommandHandler(IVillajourDbContext context)
     {
         _context = context;
     }

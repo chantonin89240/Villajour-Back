@@ -12,9 +12,9 @@ public record class GetMairieByIdCommand : IRequest<MairieEntity>
 
 public class GetMairieByIdCommandHandler : IRequestHandler<GetMairieByIdCommand, MairieEntity>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public GetMairieByIdCommandHandler(IVilleajourDbContext context)
+    public GetMairieByIdCommandHandler(IVillajourDbContext context)
     {
         _context = context;
     }

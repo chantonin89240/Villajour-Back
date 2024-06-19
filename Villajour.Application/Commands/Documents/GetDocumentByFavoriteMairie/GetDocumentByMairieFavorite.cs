@@ -13,9 +13,9 @@ public record class GetDocumentByMairieFavoriteCommand : IRequest<List<DocumentB
 
 public class GetDocumentByMairieFavoriteHandler : IRequestHandler<GetDocumentByMairieFavoriteCommand, List<DocumentByMairieFavoriteDto>>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public GetDocumentByMairieFavoriteHandler(IVilleajourDbContext context)
+    public GetDocumentByMairieFavoriteHandler(IVillajourDbContext context)
     {
         _context = context;
     }

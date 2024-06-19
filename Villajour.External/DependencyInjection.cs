@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.SemanticKernel;
 using Villajour.Application.Chatbot.Interfaces;
@@ -7,7 +6,7 @@ using Villajour.Domain.Extension;
 using Villajour.External.Chatbot;
 using Villajour.External.Options;
 
-namespace Villajour.External;
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class DependencyInjection
 {

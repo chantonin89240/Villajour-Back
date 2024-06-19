@@ -15,9 +15,9 @@ public class GetDocumentByMairieDetailCommand : IRequest<List<DocumentByMairieDe
 
 public class GetDocumentByMairieDetailHandler : IRequestHandler<GetDocumentByMairieDetailCommand, List<DocumentByMairieDetailDto>>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public GetDocumentByMairieDetailHandler(IVilleajourDbContext context)
+    public GetDocumentByMairieDetailHandler(IVillajourDbContext context)
     {
         _context = context;
     }

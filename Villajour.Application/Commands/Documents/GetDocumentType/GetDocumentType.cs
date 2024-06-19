@@ -12,9 +12,9 @@ public record class GetDocumentTypeCommand : IRequest<List<DocumentTypeEntity>>
 
 public class GetDocumentTypeHandler : IRequestHandler<GetDocumentTypeCommand, List<DocumentTypeEntity>>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public GetDocumentTypeHandler(IVilleajourDbContext context)
+    public GetDocumentTypeHandler(IVillajourDbContext context)
     {
         _context = context;
     }

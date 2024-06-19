@@ -7,7 +7,7 @@ namespace Villajour.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AppointmentsController : ControllerBase
+    public class AppointmentsController : ApiControllerBase
     {
         private readonly IAppointmentService _appointmentService;
 

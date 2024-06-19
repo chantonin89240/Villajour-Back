@@ -12,9 +12,9 @@ public record class GetEventByMairieCommand : IRequest<List<EventEntity>>
 
 public class GetEventComingByMairieCommandHandler : IRequestHandler<GetEventByMairieCommand, List<EventEntity>>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public GetEventComingByMairieCommandHandler(IVilleajourDbContext context)
+    public GetEventComingByMairieCommandHandler(IVillajourDbContext context)
     {
         _context = context;
     }

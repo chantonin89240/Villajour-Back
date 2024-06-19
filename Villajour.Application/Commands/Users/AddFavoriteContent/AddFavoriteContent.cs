@@ -14,9 +14,9 @@ public record class AddFavoriteContentCommand : IRequest<FavoriteContentEntity>
 
 public class AddFavoriteContentCommandHandler : IRequestHandler<AddFavoriteContentCommand, FavoriteContentEntity>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public AddFavoriteContentCommandHandler(IVilleajourDbContext context)
+    public AddFavoriteContentCommandHandler(IVillajourDbContext context)
     {
         _context = context;
     }

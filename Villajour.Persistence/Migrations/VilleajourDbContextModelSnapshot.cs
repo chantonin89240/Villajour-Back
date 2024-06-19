@@ -10,8 +10,8 @@ using Villajour.Persistence;
 
 namespace Villajour.Persistence.Migrations
 {
-    [DbContext(typeof(VilleajourDbContext))]
-    partial class VilleajourDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(VillajourDbContext))]
+    partial class VillajourDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

@@ -13,9 +13,9 @@ public record class AddUserCommand : IRequest<UserEntity>
 
 public class AddUserCommandHandler : IRequestHandler<AddUserCommand, UserEntity>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public AddUserCommandHandler(IVilleajourDbContext context)
+    public AddUserCommandHandler(IVillajourDbContext context)
     {
         _context = context;
     }

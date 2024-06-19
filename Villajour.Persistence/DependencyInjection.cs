@@ -11,8 +11,9 @@ using Villajour.Persistence.Chatbot.Repositories;
 using Villajour.Persistence.Chatbot.Options;
 using Villajour.Application.Interfaces;
 using Villajour.Persistence.Repositories;
+using Villajour.Persistence;
 
-namespace Villajour.Persistence;
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class DependencyInjection
 {
@@ -20,14 +21,14 @@ public static class DependencyInjection
     {
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-        services.AddDbContext<VilleajourDbContext>((sp, options) =>
+        services.AddDbContext<VillajourDbContext>((sp, options) =>
         {
             options.UseSqlServer(connectionString);
         });
 
-        services.AddScoped<IVilleajourDbContext, VilleajourDbContext>();
+        services.AddScoped<IVillajourDbContext, VillajourDbContext>();
 
-        services.AddScoped<VilleajourDbContextInitialiser>();
+        services.AddScoped<VillajourDbContextInitialiser>();
         services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 
         var cosmosConfig = services.BuildServiceProvider().GetRequiredService<IOptions<CosmosDb>>().Value;

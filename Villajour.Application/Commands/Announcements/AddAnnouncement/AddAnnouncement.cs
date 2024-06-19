@@ -13,9 +13,9 @@ namespace Villajour.Application.Commands.Announcements.AddAnnouncement
     }
     public class AddAnnouncementCommandHandler : IRequestHandler<AddAnnouncementCommand, AnnouncementEntity>
     {
-        private readonly IVilleajourDbContext _context;
+        private readonly IVillajourDbContext _context;
 
-        public AddAnnouncementCommandHandler(IVilleajourDbContext context)
+        public AddAnnouncementCommandHandler(IVillajourDbContext context)
         {
             _context = context;
         }

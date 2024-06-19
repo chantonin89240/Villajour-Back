@@ -1,7 +1,7 @@
-﻿using Villajour.Application.Common.Interfaces;
+﻿using Villajour.Application.Interfaces;
 using Villajour.Domain.Common;
 
-namespace Villajour.Application.Common
+namespace Villajour.Application.Services
 {
     public class AppointmentService : IAppointmentService
     {

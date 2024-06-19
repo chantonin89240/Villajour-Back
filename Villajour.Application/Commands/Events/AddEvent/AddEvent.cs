@@ -17,9 +17,9 @@ public record class AddEventCommand : IRequest<EventEntity>
 
 public class AddEventCommandHandler : IRequestHandler<AddEventCommand, EventEntity>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public AddEventCommandHandler(IVilleajourDbContext context)
+    public AddEventCommandHandler(IVillajourDbContext context)
     {
         _context = context;
     }

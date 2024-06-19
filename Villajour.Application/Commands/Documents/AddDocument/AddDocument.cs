@@ -16,9 +16,9 @@ public record class AddDocumentCommand : IRequest<DocumentEntity>
 
 public class AddDocumentCommandHandler : IRequestHandler<AddDocumentCommand, DocumentEntity>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public AddDocumentCommandHandler(IVilleajourDbContext context)
+    public AddDocumentCommandHandler(IVillajourDbContext context)
     {
         _context = context;
     }

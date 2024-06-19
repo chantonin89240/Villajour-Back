@@ -1,4 +1,5 @@
-﻿using Villajour.Application;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Villajour.External;
 using Villajour.Persistence;
 
@@ -17,5 +18,10 @@ public static class ProgramExtensions
         builder.Services.AddApplicationServices();
         builder.Services.AddExternalServices();
         builder.Services.AddPersistenceServices(builder.Configuration);
+    }
+
+    public static AuthenticationBuilder Test(this AuthenticationBuilder builder, Action<IServiceProvider, JwtBearerOptions> action) 
+    {
+        return builder;
     }
 }
