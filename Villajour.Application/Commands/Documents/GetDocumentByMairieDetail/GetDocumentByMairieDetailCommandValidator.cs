@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using Villajour.Application.Commands.Documents.GetDocumentByFavoriteMairie;
 
 namespace Villajour.Application.Commands.Documents.GetDocumentByMairieDetail;
 

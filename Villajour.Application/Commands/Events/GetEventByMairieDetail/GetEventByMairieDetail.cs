@@ -4,38 +4,40 @@ using Villajour.Application.Commands.Dto;
 using Villajour.Application.Commands.Interface;
 using Villajour.Domain.Common;
 
-namespace Villajour.Application.Commands.Documents.GetDocumentByMairieDetail;
+namespace Villajour.Application.Commands.Events.GetEventByMairieDetail;
 
-public class GetDocumentByMairieDetailCommand : IRequest<List<DocumentByMairieDetailDto>>
+public class GetEventByMairieDetailCommand : IRequest<List<EventByMairieDetailDto>>
 {
     public Guid UserId { get; set; }
     public Guid MairieId { get; set; }
 }
 
-public class GetDocumentByMairieDetailHandler : IRequestHandler<GetDocumentByMairieDetailCommand, List<DocumentByMairieDetailDto>>
+
+public class GetEventByMairieDetailHandler : IRequestHandler<GetEventByMairieDetailCommand, List<EventByMairieDetailDto>>
 {
     private readonly IVillajourDbContext _context;
 
-    public GetDocumentByMairieDetailHandler(IVillajourDbContext context)
+    public GetEventByMairieDetailHandler(IVillajourDbContext context)
     {
         _context = context;
     }
 
-    public async Task<List<DocumentByMairieDetailDto?>> Handle(GetDocumentByMairieDetailCommand request, CancellationToken cancellationToken)
+    public async Task<List<EventByMairieDetailDto?>> Handle(GetEventByMairieDetailCommand request, CancellationToken cancellationToken)
     {
-        List<DocumentByMairieDetailDto> entity = await (from d in _context.Documents
-                                                        join dt in _context.DocumentTypes on d.DocumentTypeId equals dt.Id
-                                                        join fc in _context.FavoritesContent on d.Id equals fc.DocumentId into fcGroup
+        List<EventByMairieDetailDto> entity = await (from d in _context.Events
+                                                        join dt in _context.EventTypes on d.EventTypeId equals dt.Id
+                                                        join fc in _context.FavoritesContent on d.Id equals fc.EventId into fcGroup
                                                         from fc in fcGroup.DefaultIfEmpty()
                                                         where d.MairieId == request.MairieId
-                                                        select new DocumentByMairieDetailDto
+                                                        select new EventByMairieDetailDto
                                                         {
                                                             Id = d.Id,
-                                                            Date = d.Date,
+                                                            StartTime = d.StartTime,
+                                                            EndTime = d.EndTime,
+                                                            Address = d.Address,
                                                             Title = d.Title,
                                                             Description = d.Description,
-                                                            DocumentUrl = d.DocumentUrl,
-                                                            DocumentType = new DocumentTypeEntity
+                                                            EventType = new EventTypeEntity
                                                             {
                                                                 Id = dt.Id,
                                                                 Libelle = dt.Libelle

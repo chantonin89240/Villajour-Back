@@ -2,7 +2,7 @@
 
 namespace Villajour.Application.Commands.Dto;
 
-public class EventByMairieFavoriteDto
+public class EventDto
 {
     public int Id { get; set; }
     public DateTime StartTime { get; set; }
@@ -12,5 +12,4 @@ public class EventByMairieFavoriteDto
     public string? Description { get; set; }
     public EventTypeEntity? EventType { get; set; }
     public MairieEntity? Mairie { get; set; }
-    public bool Favorite { get; set; }
 }

@@ -22,23 +22,28 @@ public class GetEventByMairieFavoriteHandler : IRequestHandler<GetEventByMairieF
 
     public async Task<List<EventByMairieFavoriteDto?>> Handle(GetEventByMairieFavoriteCommand request, CancellationToken cancellationToken)
     {
-        List<EventByMairieFavoriteDto> entity = await _context.FavoritesMairie
-            .Where(f => f.UserId == request.UserId)
-            .Join(_context.Mairies, f => f.MairieId, m => m.Id, (f, m) => new { FavoriteMairie = f, Mairie = m })
-            .Join(_context.Events, fm => fm.Mairie.Id, e => e.MairieId,
-                  (fm, e) => new EventByMairieFavoriteDto
-                  {
-                      Mairie = fm.Mairie,
-                      EventList = new List<EventEntity> { e }
-                  })
-            .GroupBy(e => e.Mairie.Id)
-            .Select(g => new EventByMairieFavoriteDto
-            {
-                Mairie = g.First().Mairie,
-                EventList = g.Select(e => e.EventList.First()).ToList()
-            })
-            .ToListAsync(cancellationToken);
-
+        List<EventByMairieFavoriteDto> entity = await (from fm in _context.FavoritesMairie
+                                                          join m in _context.Mairies on fm.MairieId equals m.Id
+                                                          join d in _context.Events on m.Id equals d.MairieId
+                                                          join dt in _context.EventTypes on d.EventTypeId equals dt.Id
+                                                          where fm.UserId == request.UserId
+                                                          select new EventByMairieFavoriteDto
+                                                          {
+                                                              Id = d.Id,
+                                                              StartTime = d.StartTime,
+                                                              EndTime = d.EndTime,
+                                                              Address = d.Address,
+                                                              Title = d.Title,
+                                                              Description = d.Description,
+                                                              EventType = new EventTypeEntity
+                                                              {
+                                                                  Id = dt.Id,
+                                                                  Libelle = dt.Libelle
+                                                              },
+                                                              Mairie = m,
+                                                              Favorite = _context.FavoritesContent.Any(fc => fc.UserId == request.UserId && fc.EventId == d.Id)
+                                                          })
+                                                        .ToListAsync(cancellationToken);
 
         return entity;
     }
