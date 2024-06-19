@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Villajour.Application.Commands.Documents.GetDocumentByMairieDetail;
 using Villajour.Application.Commands.Dto;
 using Villajour.Application.Commands.Events.AddEvent;
 using Villajour.Application.Commands.Events.DeleteEvent;
@@ -9,6 +8,7 @@ using Villajour.Application.Commands.Events.GetEventByMairieDetail;
 using Villajour.Application.Commands.Events.GetEventByMairieFavorite;
 using Villajour.Application.Commands.Events.GetEventFavoriteByUser;
 using Villajour.Application.Commands.Events.GetEventHistoByMairie;
+using Villajour.Application.Commands.Events.GetEventType;
 using Villajour.Application.Commands.Events.UpdateEvent;
 using Villajour.Domain.Common;
 
@@ -243,6 +243,27 @@ public class EventController : ApiControllerBase
             {
                 return NotFound("il n'y a pas de document");
             }
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// fonction pour la liste des types d'event
+    /// </summary>
+    /// <param></param>
+    /// <returns>Code http Ok et liste de type d'event</returns>
+    [HttpGet("GetEventType")]
+    public async Task<IActionResult> GetEventType()
+    {
+        try
+        {
+            GetEventTypeCommand command = new GetEventTypeCommand();
+            List<EventTypeEntity> DocumentType = await Mediator.Send(command);
+
+            return Ok(DocumentType);
         }
         catch (Exception ex)
         {
