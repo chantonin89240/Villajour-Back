@@ -1,11 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Villajour.Application.Commands.Documents.GetDocumentByMairieDetail;
+using Villajour.Application.Commands.Dto;
 using Villajour.Application.Commands.Events.AddEvent;
 using Villajour.Application.Commands.Events.DeleteEvent;
-using Villajour.Application.Commands.Events.GetEventByMairie;
+using Villajour.Application.Commands.Events.GetEventByMairieDetail;
 using Villajour.Application.Commands.Events.GetEventByMairieFavorite;
-using Villajour.Application.Commands.Events.GetEventComingByMairie;
 using Villajour.Application.Commands.Events.GetEventFavoriteByUser;
 using Villajour.Application.Commands.Events.GetEventHistoByMairie;
 using Villajour.Application.Commands.Events.UpdateEvent;
@@ -38,9 +39,17 @@ public class EventController : ApiControllerBase
         {
             GetEventFavoriteByUserCommand command = new GetEventFavoriteByUserCommand();
             command.UserId = UserId;
-            List<EventEntity> eventEnt = await _mediator.Send(command);
+            List<EventDto> eventEnt = await _mediator.Send(command);
 
-            return Ok(eventEnt);
+           
+            if (eventEnt != null)
+            {
+                return Ok(eventEnt);
+            }
+            else
+            {
+                return NotFound("L'utilisateur n'existe pas !");
+            }
         }
         catch (Exception ex)
         {
@@ -84,57 +93,8 @@ public class EventController : ApiControllerBase
     /// </summary>
     /// <param name="MairieId">Identifiant Guid de la mairie</param>
     /// <returns>Liste de l'ensemble des events d'une mairies par ordre décroissant</returns>
-    [HttpGet("GetEventByMairie/{MairieId}")]
-    public async Task<IActionResult> GetEventByMairie(Guid MairieId)
-    {
-        if (MairieId.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
-
-        try
-        {
-            GetEventByMairieCommand command = new GetEventByMairieCommand();
-            command.MairieId = MairieId;
-            List<EventEntity> eventEnt = await _mediator.Send(command);
-
-            return Ok(eventEnt);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, ex.Message);
-        }
-    }
-
-    /// <summary>
-    /// fonction pour récupérer les events a venir en fonction d'une mairie
-    /// </summary>
-    /// <param name="MairieId">Identifiant Guid de la mairie</param>
-    /// <returns>Liste des events qui arrive</returns>
-    [HttpGet("GetEventComingByMairie/{MairieId}")]
-    public async Task<IActionResult> GetEventComingByMairie(Guid MairieId)
-    {
-        if (MairieId.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
-
-        try
-        {
-            GetEventComingByMairieCommand command = new GetEventComingByMairieCommand();
-            command.MairieId = MairieId;
-            List<EventEntity> eventEnt = await _mediator.Send(command);
-
-            return Ok(eventEnt);
-
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, ex.Message);
-        }
-    }
-
-    /// <summary>
-    /// fonction pour récupérer l'historique des events d'une mairie
-    /// </summary>
-    /// <param name="MairieId">Identifiant Guid de la mairie</param>
-    /// <returns>Liste des events qui sont terminé</returns>
     [HttpGet("GetEventHistoByMairie/{MairieId}")]
-    public async Task<IActionResult> GetEventHistoByMairie(Guid MairieId)
+    public async Task<IActionResult> GetEventByMairie(Guid MairieId)
     {
         if (MairieId.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
 
@@ -142,10 +102,16 @@ public class EventController : ApiControllerBase
         {
             GetEventHistoByMairieCommand command = new GetEventHistoByMairieCommand();
             command.MairieId = MairieId;
-            List<EventEntity> eventEnt = await _mediator.Send(command);
+            List<EventDto> eventEnt = await _mediator.Send(command);
 
-            return Ok(eventEnt);
-
+            if (eventEnt != null)
+            {
+                return Ok(eventEnt);
+            }
+            else
+            {
+                return NotFound("La mairie n'existe pas !");
+            }
         }
         catch (Exception ex)
         {
@@ -243,6 +209,39 @@ public class EventController : ApiControllerBase
             else
             {
                 return StatusCode(400, "L'événnement n'existe pas !");
+            }
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// fonction pour récupérer les events d'une mairie
+    /// </summary>
+    /// <param name="id">Identifiant Guid de la mairie</param>
+    /// <returns>Code http Ok et liste d'events</returns>
+    [HttpGet("GetEventByMairieDetail/{UserId}/{MairieId}")]
+    public async Task<IActionResult> GetEventByMairieDetail(Guid UserId, Guid MairieId)
+    {
+        if (UserId.ToString().IsNullOrEmpty()) return BadRequest("incorrect user Guid.");
+        if (MairieId.ToString().IsNullOrEmpty()) return BadRequest("incorrect mairie Guid.");
+
+        try
+        {
+            GetEventByMairieDetailCommand command = new GetEventByMairieDetailCommand();
+            command.UserId = UserId;
+            command.MairieId = MairieId;
+            List<EventByMairieDetailDto> eventEnt = await Mediator.Send(command);
+
+            if (eventEnt != null)
+            {
+                return Ok(eventEnt);
+            }
+            else
+            {
+                return NotFound("il n'y a pas de document");
             }
         }
         catch (Exception ex)

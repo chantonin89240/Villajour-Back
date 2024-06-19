@@ -126,11 +126,11 @@ public class DocumentController : ApiControllerBase
         {
             GetDocumentByMairieFavoriteCommand command = new GetDocumentByMairieFavoriteCommand();
             command.UserId = UserId;
-            var eventEnt = await _mediator.Send(command);
+            var document = await _mediator.Send(command);
 
-            if (eventEnt != null)
+            if (document != null)
             {
-                return Ok(eventEnt);
+                return Ok(document);
             }
             else
             {
@@ -261,8 +261,8 @@ public class DocumentController : ApiControllerBase
     [HttpGet("GetDocumentByMairieDetail/{UserId}/{MairieId}")]
     public async Task<IActionResult> GetDocumentByMairieDetail(Guid UserId, Guid MairieId)
     {
-        if (MairieId.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
-        if (MairieId.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
+        if (UserId.ToString().IsNullOrEmpty()) return BadRequest("incorrect user Guid.");
+        if (MairieId.ToString().IsNullOrEmpty()) return BadRequest("incorrect mairie Guid.");
 
         try
         {
