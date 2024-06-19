@@ -15,9 +15,9 @@ public class GetEventByMairieDetailCommand : IRequest<List<EventByMairieDetailDt
 
 public class GetEventByMairieDetailHandler : IRequestHandler<GetEventByMairieDetailCommand, List<EventByMairieDetailDto>>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public GetEventByMairieDetailHandler(IVilleajourDbContext context)
+    public GetEventByMairieDetailHandler(IVillajourDbContext context)
     {
         _context = context;
     }

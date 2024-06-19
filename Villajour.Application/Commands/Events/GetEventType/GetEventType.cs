@@ -12,9 +12,9 @@ public record class GetEventTypeCommand : IRequest<List<EventTypeEntity>>
 
 public class GetEventTypeHandler : IRequestHandler<GetEventTypeCommand, List<EventTypeEntity>>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public GetEventTypeHandler(IVilleajourDbContext context)
+    public GetEventTypeHandler(IVillajourDbContext context)
     {
         _context = context;
     }
