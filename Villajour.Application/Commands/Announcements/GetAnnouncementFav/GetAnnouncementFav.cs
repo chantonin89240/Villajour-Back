@@ -12,9 +12,9 @@ namespace Villajour.Application.Commands.Announcements.GetAnnouncementFav
 
     public class GetAnnouncementFavHandler : IRequestHandler<GetAnnouncementFavCommand, List<AnnouncementEntity>>
     {
-        private readonly IVilleajourDbContext _context;
+        private readonly IVillajourDbContext _context;
 
-        public GetAnnouncementFavHandler(IVilleajourDbContext context)
+        public GetAnnouncementFavHandler(IVillajourDbContext context)
         {
             _context = context;
         }

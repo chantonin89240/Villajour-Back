@@ -12,9 +12,9 @@ public record class GetUserByIdCommand : IRequest<UserEntity>
 
 public class GetUserByIdCommandHandler : IRequestHandler<GetUserByIdCommand, UserEntity>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public GetUserByIdCommandHandler(IVilleajourDbContext context)
+    public GetUserByIdCommandHandler(IVillajourDbContext context)
     {
         _context = context;
     }

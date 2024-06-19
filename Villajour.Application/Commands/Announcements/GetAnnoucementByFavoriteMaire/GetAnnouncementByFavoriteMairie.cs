@@ -14,9 +14,9 @@ namespace Villajour.Application.Commands.Announcements.GetAnnoucementByFavoriteM
 
     public class GetAnnouncementByMairieFavoriteHandler : IRequestHandler<GetAnnoucementByFavoriteMaireCommand, List<AnnouncementByMairieFavoriteDto>>
     {
-        private readonly IVilleajourDbContext _context;
+        private readonly IVillajourDbContext _context;
 
-        public GetAnnouncementByMairieFavoriteHandler(IVilleajourDbContext context)
+        public GetAnnouncementByMairieFavoriteHandler(IVillajourDbContext context)
         {
             _context = context;
         }

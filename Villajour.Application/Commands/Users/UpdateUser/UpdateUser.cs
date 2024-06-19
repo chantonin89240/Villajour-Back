@@ -14,9 +14,9 @@ public record class UpdateUserCommand : IRequest<UserEntity>
 
 public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, UserEntity>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public UpdateUserCommandHandler(IVilleajourDbContext context)
+    public UpdateUserCommandHandler(IVillajourDbContext context)
     {
         _context = context;
     }

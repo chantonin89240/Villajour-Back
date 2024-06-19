@@ -11,9 +11,9 @@ namespace Villajour.Application.Commands.Announcements.DeleteAnnouncement
     }
     public class DeleteAnnouncementCommandHandler : IRequestHandler<DeleteAnnouncementCommand, bool>
     {
-        private readonly IVilleajourDbContext _context;
+        private readonly IVillajourDbContext _context;
 
-        public DeleteAnnouncementCommandHandler(IVilleajourDbContext context)
+        public DeleteAnnouncementCommandHandler(IVillajourDbContext context)
         {
             _context = context;
         }

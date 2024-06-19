@@ -13,9 +13,9 @@ public record class AddFavoriteMairieCommand : IRequest<FavoriteMairieEntity>
 
 public class AddFavoriteMairieCommandHandler : IRequestHandler<AddFavoriteMairieCommand, FavoriteMairieEntity>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public AddFavoriteMairieCommandHandler(IVilleajourDbContext context)
+    public AddFavoriteMairieCommandHandler(IVillajourDbContext context)
     {
         _context = context;
     }

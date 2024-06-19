@@ -11,7 +11,7 @@ using Villajour.Persistence;
 
 namespace Villajour.Persistence.Migrations
 {
-    [DbContext(typeof(VilleajourDbContext))]
+    [DbContext(typeof(VillajourDbContext))]
     [Migration("20240613084910_ModifMairie")]
     partial class ModifMairie
     {

@@ -12,9 +12,9 @@ public record class GetEventFavoriteByUserCommand : IRequest<List<EventEntity>>
 
 public class GetEventFavoriteByUserCommandHandler : IRequestHandler<GetEventFavoriteByUserCommand, List<EventEntity>>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public GetEventFavoriteByUserCommandHandler(IVilleajourDbContext context)
+    public GetEventFavoriteByUserCommandHandler(IVillajourDbContext context)
     {
         _context = context;
     }

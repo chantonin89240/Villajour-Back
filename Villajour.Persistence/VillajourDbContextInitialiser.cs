@@ -10,17 +10,17 @@ public static class InitialiserExtensions
     {
         using var scope = app.Services.CreateScope();
 
-        var initialiser = scope.ServiceProvider.GetRequiredService<VilleajourDbContextInitialiser>();
+        var initialiser = scope.ServiceProvider.GetRequiredService<VillajourDbContextInitialiser>();
 
         await initialiser.InitialiseAsync();
     }
 }
 
-public class VilleajourDbContextInitialiser
+public class VillajourDbContextInitialiser
 {
-    private readonly VilleajourDbContext _context;
+    private readonly VillajourDbContext _context;
 
-    public VilleajourDbContextInitialiser(VilleajourDbContext context)
+    public VillajourDbContextInitialiser(VillajourDbContext context)
     {
         this._context = context;
     }

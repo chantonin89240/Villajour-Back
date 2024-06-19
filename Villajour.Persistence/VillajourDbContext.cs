@@ -5,7 +5,7 @@ using Villajour.Domain.Common;
 
 namespace Villajour.Persistence;
 
-public class VilleajourDbContext : DbContext, IVilleajourDbContext
+public class VillajourDbContext : DbContext, IVillajourDbContext
 {
     public DbSet<UserEntity> Users => Set<UserEntity>();
     public DbSet<MairieEntity> Mairies => Set<MairieEntity>();
@@ -24,7 +24,7 @@ public class VilleajourDbContext : DbContext, IVilleajourDbContext
     public DbSet<FavoriteMairieEntity> FavoritesMairie => Set<FavoriteMairieEntity>();
 
 
-    public VilleajourDbContext(DbContextOptions<VilleajourDbContext> options) : base(options) { }
+    public VillajourDbContext(DbContextOptions<VillajourDbContext> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

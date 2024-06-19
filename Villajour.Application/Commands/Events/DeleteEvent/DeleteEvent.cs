@@ -11,9 +11,9 @@ public record class DeleteEventCommand : IRequest<bool>
 
 public class DeleteMairieCommandHandler : IRequestHandler<DeleteEventCommand, bool>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public DeleteMairieCommandHandler(IVilleajourDbContext context)
+    public DeleteMairieCommandHandler(IVillajourDbContext context)
     {
         _context = context;
     }

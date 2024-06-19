@@ -6,9 +6,9 @@ namespace Villajour.Persistence.Repositories
 {
     public class AppointmentRepository : IAppointmentRepository
     {
-        private readonly VilleajourDbContext _context;
+        private readonly VillajourDbContext _context;
 
-        public AppointmentRepository(VilleajourDbContext context)
+        public AppointmentRepository(VillajourDbContext context)
         {
             _context = context;
         }

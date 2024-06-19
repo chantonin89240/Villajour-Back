@@ -13,9 +13,9 @@ public record class GetDocumentFavCommand : IRequest<List<DocumentDto>>
 
 public class GetDocumentFavHandler : IRequestHandler<GetDocumentFavCommand, List<DocumentDto>>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public GetDocumentFavHandler(IVilleajourDbContext context)
+    public GetDocumentFavHandler(IVillajourDbContext context)
     {
         _context = context;
     }

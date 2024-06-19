@@ -11,9 +11,9 @@ public record class DeleteDocumentCommand : IRequest<bool>
 
 public class DeleteDocumentCommandHandler : IRequestHandler<DeleteDocumentCommand, bool>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public DeleteDocumentCommandHandler(IVilleajourDbContext context)
+    public DeleteDocumentCommandHandler(IVillajourDbContext context)
     {
         _context = context;
     }

@@ -9,9 +9,9 @@ public record class GetMairiesCommand : IRequest<List<MairieEntity>>;
 
 public class GetMairiesCommandHandler : IRequestHandler<GetMairiesCommand, List<MairieEntity>>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public GetMairiesCommandHandler(IVilleajourDbContext context)
+    public GetMairiesCommandHandler(IVillajourDbContext context)
     {
         _context = context;
     }

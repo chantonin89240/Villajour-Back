@@ -13,9 +13,9 @@ public record class GetEventByMairieFavoriteCommand : IRequest<List<EventByMairi
 
 public class GetEventByMairieFavoriteHandler : IRequestHandler<GetEventByMairieFavoriteCommand, List<EventByMairieFavoriteDto>>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public GetEventByMairieFavoriteHandler(IVilleajourDbContext context)
+    public GetEventByMairieFavoriteHandler(IVillajourDbContext context)
     {
         _context = context;
     }

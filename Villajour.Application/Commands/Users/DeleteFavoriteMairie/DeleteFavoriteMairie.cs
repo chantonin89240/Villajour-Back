@@ -13,9 +13,9 @@ public record class DeleteFavoriteMairieCommand : IRequest<bool>
 
 public class DeleteFavoriteMairieCommandHandler : IRequestHandler<DeleteFavoriteMairieCommand, bool>
 {
-    private readonly IVilleajourDbContext _context;
+    private readonly IVillajourDbContext _context;
 
-    public DeleteFavoriteMairieCommandHandler(IVilleajourDbContext context)
+    public DeleteFavoriteMairieCommandHandler(IVillajourDbContext context)
     {
         _context = context;
     }
