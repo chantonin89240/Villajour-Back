@@ -29,7 +29,7 @@ public class EventController : ApiControllerBase
     /// fonction pour récupérer les events favorit d'un utilisateur
     /// </summary>
     /// <param name="UserId">Identifiant Guid du user</param>
-    /// <returns>Liste des events que l'utilisateur a en favoris et dont la date de fin est supérieur ou égale à la date du jour</returns>
+    /// <returns>Liste des events que l'utilisateur a en favoris</returns>
     [HttpGet("GetEventFavoriteByUser/{UserId}")]
     public async Task<IActionResult> GetEventFavoriteByUser(Guid UserId)
     {
@@ -71,7 +71,7 @@ public class EventController : ApiControllerBase
         {
             GetEventByMairieFavoriteCommand command = new GetEventByMairieFavoriteCommand();
             command.UserId = UserId;
-            var eventEnt = await _mediator.Send(command);
+            List<EventByMairieFavoriteDto> eventEnt = await _mediator.Send(command);
 
             if (eventEnt != null)
             {
