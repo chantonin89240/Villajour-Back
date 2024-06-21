@@ -48,7 +48,9 @@ public class GetEventFavoriteByUserCommandHandler : IRequestHandler<GetEventFavo
                     Phone = m.Phone,
                     Picture = m.Picture,
                     Siret = m.Siret,
-                    Address = m.Address
+                    Address = m.Address,
+                    Name = m.Name,
+                    Email = m.Email,
                 }
             })
              .ToListAsync(cancellationToken);

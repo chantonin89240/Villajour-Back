@@ -8,6 +8,7 @@ using Villajour.Application.Commands.Users.AddUser;
 using Villajour.Application.Commands.Users.DeleteFavoriteContent;
 using Villajour.Application.Commands.Users.DeleteFavoriteMairie;
 using Villajour.Application.Commands.Users.DeleteUser;
+using Villajour.Application.Commands.Users.GetMairieFavByUser;
 using Villajour.Application.Commands.Users.GetUserById;
 using Villajour.Application.Commands.Users.UpdateUser;
 using Villajour.Domain.Common;
@@ -283,6 +284,37 @@ public class UserController : ApiControllerBase
             else
             {
                 return StatusCode(400, "Le favoris n'existe pas !");
+            }
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// fonction pour récupérer tous les mairies favoris du user
+    /// </summary>
+    /// <param name="UserId">Identifiant Guid du user</param>
+    /// <returns>Dto UserMairieFav</returns>
+    [HttpGet("GetMairieFavByUser/{UserId}")]
+    public async Task<IActionResult> GetMairieFavByUser(Guid UserId)
+    {
+        if (UserId.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
+
+        try
+        {
+            GetMairieFavByUserCommand command = new GetMairieFavByUserCommand();
+            command.UserId = UserId;
+            List<UserMairieFav> user = await _mediator.Send(command);
+
+            if (user != null)
+            {
+                return Ok(user);
+            }
+            else
+            {
+                return NotFound("L'utilisateur n'existe pas !");
             }
         }
         catch (Exception ex)
