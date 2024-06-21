@@ -14,9 +14,9 @@ namespace Villajour.Application.Commands.Appointments.GetAppointmentByUser
 
     public class GetAppointmentByUserCommandHandler : IRequestHandler<GetAppointmentByUserCommand, List<AppointmentEntity>>
         {
-            private readonly IVilleajourDbContext _context;
+            private readonly IVillajourDbContext _context;
 
-            public GetAppointmentByUserCommandHandler(IVilleajourDbContext context)
+            public GetAppointmentByUserCommandHandler(IVillajourDbContext context)
             {
                 _context = context;
             }

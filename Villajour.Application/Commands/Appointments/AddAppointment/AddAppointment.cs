@@ -18,9 +18,9 @@ namespace Villajour.Application.Commands.Appointments.AddAppointment
 
     public class AddAppointmentCommandHandler : IRequestHandler<AddAppointmentCommand, AppointmentEntity>
     {
-        private readonly IVilleajourDbContext _context;
+        private readonly IVillajourDbContext _context;
 
-        public AddAppointmentCommandHandler(IVilleajourDbContext context)
+        public AddAppointmentCommandHandler(IVillajourDbContext context)
         {
             _context = context;
         }

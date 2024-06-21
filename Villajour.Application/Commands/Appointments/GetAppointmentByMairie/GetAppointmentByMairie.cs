@@ -13,9 +13,9 @@ namespace Villajour.Application.Commands.Appointments.GetAppointmentByMairie
 
     public class GetAppointmentByMairieCommandHandler : IRequestHandler<GetAppointmentByMairieCommand, List<AppointmentEntity>>
     {
-        private readonly IVilleajourDbContext _context;
+        private readonly IVillajourDbContext _context;
 
-        public GetAppointmentByMairieCommandHandler(IVilleajourDbContext context)
+        public GetAppointmentByMairieCommandHandler(IVillajourDbContext context)
         {
             _context = context;
         }

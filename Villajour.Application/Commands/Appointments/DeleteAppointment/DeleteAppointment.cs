@@ -11,9 +11,9 @@ namespace Villajour.Application.Commands.Appointments.DeleteAppointment
 
     public class DeleteAppointmentCommandHandler : IRequestHandler<DeleteAppointmentCommand, bool>
     {
-        private readonly IVilleajourDbContext _context;
+        private readonly IVillajourDbContext _context;
 
-        public DeleteAppointmentCommandHandler(IVilleajourDbContext context)
+        public DeleteAppointmentCommandHandler(IVillajourDbContext context)
         {
             _context = context;
         }

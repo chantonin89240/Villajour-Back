@@ -21,9 +21,9 @@ namespace Villajour.Application.Commands.Appointments.ValidateAppointment
 
     public class ValidateAppointmentCommandHandler : IRequestHandler<UpdateAppointmentCommand, AppointmentEntity>
     {
-        private readonly IVilleajourDbContext _context;
+        private readonly IVillajourDbContext _context;
 
-        public ValidateAppointmentCommandHandler(IVilleajourDbContext context)
+        public ValidateAppointmentCommandHandler(IVillajourDbContext context)
         {
             _context = context;
         }
