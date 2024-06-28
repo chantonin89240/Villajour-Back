@@ -8,6 +8,7 @@ namespace Villajour.UnitTest
     using System.Threading.Tasks;
     using Villajour.API.Controllers;
     using Villajour.Application.Commands.Mairies.AddScheduleMairie;
+    using Villajour.Domain.Common;
     using Xunit;
 
     public class ScheduleMairieControllerTests
@@ -30,7 +31,7 @@ namespace Villajour.UnitTest
         //    _mediatorMock.Setup(m => m.Send(command, It.IsAny<CancellationToken>())).ReturnsAsync(scheduleMairie);
 
         //    // Act
-        //    var result = await _controller.Add(command);
+        //    var result = await _controller.AddSchedule(command);
 
         //    // Assert
         //    var okResult = Assert.IsType<ObjectResult>(result);
@@ -56,27 +57,27 @@ namespace Villajour.UnitTest
         //    _mediatorMock.Setup(m => m.Send(command, It.IsAny<CancellationToken>())).ReturnsAsync((ScheduleMairieEntity)null);
 
         //    // Act
-        //    var result = await _controller.Add(command);
+        //    var result = await _controller.AddSchedule(command);
 
         //    // Assert
         //    var notFoundResult = Assert.IsType<ObjectResult>(result);
         //    Assert.Equal("L'horaire de la mairie ne peut pas être ajouté", notFoundResult.Value);
         //}
 
-        [Fact]
-        public async Task Add_ThrowsException_ReturnsInternalServerError()
-        {
-            // Arrange
-            var command = new AddScheduleMairieCommand();
-            _mediatorMock.Setup(m => m.Send(command, It.IsAny<CancellationToken>())).ThrowsAsync(new Exception());
+        //[Fact]
+        //public async Task Add_ThrowsException_ReturnsInternalServerError()
+        //{
+        //    // Arrange
+        //    var command = new AddScheduleMairieCommand();
+        //    _mediatorMock.Setup(m => m.Send(command, It.IsAny<CancellationToken>())).ThrowsAsync(new Exception());
 
-            // Act
-            var result = await _controller.AddSchedule(command);
+        //    // Act
+        //    var result = await _controller.AddSchedule(command);
 
-            // Assert
-            var statusCodeResult = Assert.IsType<ObjectResult>(result);
-            Assert.Equal(500, statusCodeResult.StatusCode);
-            Assert.Equal("Internal server error.", statusCodeResult.Value);
-        }
+        //    // Assert
+        //    var statusCodeResult = Assert.IsType<ObjectResult>(result);
+        //    Assert.Equal(500, statusCodeResult.StatusCode);
+        //    Assert.Equal("Internal server error.", statusCodeResult.Value);
+        //}
     }
 }

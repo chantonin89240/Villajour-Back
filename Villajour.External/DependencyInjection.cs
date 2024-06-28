@@ -13,7 +13,6 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddExternalConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
-        AddOptions<Chat>(Chat.PropertyName);
         AddOptions<OpenAi>(OpenAi.PropertyName);
 
         return services;
