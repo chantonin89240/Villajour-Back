@@ -165,7 +165,7 @@ public class EventController : ApiControllerBase
             return BadRequest("Command cannot be null.");
         }
 
-        if (id != command.Id) return BadRequest("incorrect Guid.");
+        if (id != command.Id) return BadRequest("incorrect id.");
 
         try
         {
@@ -194,7 +194,7 @@ public class EventController : ApiControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteEvent(int id)
     {
-        if (id.ToString().IsNullOrEmpty()) return BadRequest("incorrect Guid.");
+        if (id.ToString().IsNullOrEmpty()) return BadRequest("incorrect id.");
 
         try
         {
@@ -261,9 +261,9 @@ public class EventController : ApiControllerBase
         try
         {
             GetEventTypeCommand command = new GetEventTypeCommand();
-            List<EventTypeEntity> DocumentType = await Mediator.Send(command);
+            List<EventTypeEntity> EventType = await Mediator.Send(command);
 
-            return Ok(DocumentType);
+            return Ok(EventType);
         }
         catch (Exception ex)
         {
