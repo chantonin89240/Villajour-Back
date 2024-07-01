@@ -11,11 +11,11 @@ public record class GetEventHistoByMairieCommand : IRequest<List<EventDto>>
     public Guid MairieId { get; set; }
 }
 
-public class GetEventHistoByMairieCommandHandler : IRequestHandler<GetEventHistoByMairieCommand, List<EventDto>>
+public class GetEventHistoByMairieHandler : IRequestHandler<GetEventHistoByMairieCommand, List<EventDto>>
 {
     private readonly IVillajourDbContext _context;
 
-    public GetEventHistoByMairieCommandHandler(IVillajourDbContext context)
+    public GetEventHistoByMairieHandler(IVillajourDbContext context)
     {
         _context = context;
     }
