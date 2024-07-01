@@ -40,15 +40,15 @@ namespace Villajour.API.Controllers
 
             try
             {
-                AnnouncementEntity announcement = await _mediator.Send(command);
+                AnnouncementEntity eventEnt = await _mediator.Send(command);
 
-                if (announcement != null)
+                if (eventEnt != null)
                 {
-                    return Ok(announcement);
+                    return Ok(eventEnt);
                 }
                 else
                 {
-                    return NotFound("L'annonce ne peut pas être ajoutée");
+                    return NotFound("L'annonce ne peut pas être ajouté");
                 }
             }
             catch (Exception ex)
