@@ -6,12 +6,12 @@ using Villajour.Domain.Common;
 
 namespace Villajour.Application.Commands.Users.GetMairieFavByUser;
 
-public record class GetMairieFavByUserCommand : IRequest<List<UserMairieFav>>
+public record class GetMairieFavByUserCommand : IRequest<List<MairieEntity>>
 {
     public Guid UserId { get; set; }
 }
 
-public class GetMairieFavByUserCommandHandler : IRequestHandler<GetMairieFavByUserCommand, List<UserMairieFav>>
+public class GetMairieFavByUserCommandHandler : IRequestHandler<GetMairieFavByUserCommand, List<MairieEntity>>
 {
     private readonly IVillajourDbContext _context;
 
@@ -20,23 +20,20 @@ public class GetMairieFavByUserCommandHandler : IRequestHandler<GetMairieFavByUs
         _context = context;
     }
 
-    public async Task<List<UserMairieFav?>> Handle(GetMairieFavByUserCommand request, CancellationToken cancellationToken)
+    public async Task<List<MairieEntity?>> Handle(GetMairieFavByUserCommand request, CancellationToken cancellationToken)
     {
-        List<UserMairieFav> entity = await (from fm in _context.FavoritesMairie
+        List<MairieEntity> entity = await (from fm in _context.FavoritesMairie
                                             join m in _context.Mairies on fm.MairieId equals m.Id
                                             where fm.UserId == request.UserId
-                                            select new UserMairieFav
+                                            select new MairieEntity
                                             {
-                                                listMairies = new MairieEntity
-                                                {
-                                                    Id = m.Id,
-                                                    Phone = m.Phone,
-                                                    Picture = m.Picture,
-                                                    Siret = m.Siret,
-                                                    Address = m.Address,
-                                                    Name = m.Name,
-                                                    Email = m.Email
-                                                }
+                                                Id = m.Id,
+                                                Phone = m.Phone,
+                                                Picture = m.Picture,
+                                                Siret = m.Siret,
+                                                Address = m.Address,
+                                                Name = m.Name,
+                                                Email = m.Email
                                             })
                         .ToListAsync(cancellationToken);
 
