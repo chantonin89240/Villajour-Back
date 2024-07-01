@@ -306,7 +306,7 @@ public class UserController : ApiControllerBase
         {
             GetMairieFavByUserCommand command = new GetMairieFavByUserCommand();
             command.UserId = UserId;
-            List<UserMairieFav> user = await _mediator.Send(command);
+            List<MairieEntity> user = await _mediator.Send(command);
 
             if (user != null)
             {
