@@ -1,6 +1,9 @@
 ﻿using MediatR;
 using Villajour.Application.Commands.Interface;
 using Villajour.Domain.Common;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Villajour.Application.Commands.Appointments.AddAppointment
 {
@@ -27,6 +30,30 @@ namespace Villajour.Application.Commands.Appointments.AddAppointment
 
         public async Task<AppointmentEntity> Handle(AddAppointmentCommand request, CancellationToken cancellationToken)
         {
+            // Vérification des chevauchements et des horaires identiques
+            var overlappingAppointments = _context.Appointments
+                .Where(a => a.MairieId == request.MairieId &&
+                            (a.StartTime == request.StartTime || a.EndTime == request.EndTime ||
+                             (a.StartTime < request.EndTime && a.EndTime > request.StartTime)))
+                .ToList();
+
+            if (overlappingAppointments.Any())
+            {
+                var overlappingEntity = new AppointmentEntity
+                {
+                    StartTime = request.StartTime,
+                    EndTime = request.EndTime,
+                    Title = request.Title,
+                    Statut = "chevauchement",
+                    Description = request.Description,
+                    AppointmentTypeId = request.AppointmentTypeId,
+                    MairieId = request.MairieId,
+                    UserId = request.UserId
+                };
+
+                return overlappingEntity;
+            }
+
             var entity = new AppointmentEntity
             {
                 StartTime = request.StartTime,
@@ -35,7 +62,7 @@ namespace Villajour.Application.Commands.Appointments.AddAppointment
                 Statut = request.Statut,
                 Description = request.Description,
                 AppointmentTypeId = request.AppointmentTypeId,
-                MairieId = request.MairieId, 
+                MairieId = request.MairieId,
                 UserId = request.UserId
             };
 
@@ -44,7 +71,6 @@ namespace Villajour.Application.Commands.Appointments.AddAppointment
             await _context.SaveChangesAsync(cancellationToken);
 
             return entity;
-
         }
     }
 }
