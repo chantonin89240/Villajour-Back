@@ -7,6 +7,8 @@ using Villajour.Application.Commands.Appointments.GetAppointmentByUser;
 using Villajour.Application.Commands.Appointments.GetAppointmentByMairie;
 using Villajour.Application.Commands.Appointments.ValidateAppointment;
 using Villajour.Application.Commands.Appointments.DeleteAppointment;
+using Villajour.Application.Commands.Events.GetEventType;
+using Villajour.Application.Commands.Appointments.GetAppointmentType;
 
 namespace Villajour.API.Controllers
 {
@@ -161,6 +163,27 @@ namespace Villajour.API.Controllers
                 {
                     return NotFound("L'événnement n'a pas pu être modifié !");
                 }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// fonction pour la liste des types d'event
+        /// </summary>
+        /// <param></param>
+        /// <returns>Code http Ok et liste de type d'event</returns>
+        [HttpGet("GetAppointmentType")]
+        public async Task<IActionResult> GetAppointmentType()
+        {
+            try
+            {
+                GetAppointmentTypeCommand command = new GetAppointmentTypeCommand();
+                List<AppointmentTypeEntity> DocumentType = await Mediator.Send(command);
+
+                return Ok(DocumentType);
             }
             catch (Exception ex)
             {
