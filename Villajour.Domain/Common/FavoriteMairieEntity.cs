@@ -17,6 +17,4 @@ public class FavoriteMairieEntity
     [Required]
     [Column(Order = 2)]
     public Guid MairieId { get; set; }
-
-    
 }

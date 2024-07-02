@@ -13,7 +13,8 @@ public record class UpdateMairieCommand : IRequest<MairieEntity>
     public string? Picture { get; set; }
     public string? Siret { get; set; }
     public string? Address { get; set; }
-
+    public string? Name { get; set; }
+    public string? Email { get; set; }
 }
 
 public class UpdateMairieCommandHandler : IRequestHandler<UpdateMairieCommand, MairieEntity>
@@ -34,6 +35,8 @@ public class UpdateMairieCommandHandler : IRequestHandler<UpdateMairieCommand, M
             entity.Phone = request.Phone;
             entity.Picture = request.Picture;
             entity.Siret = request.Siret;
+            entity.Name = request.Name;
+            entity.Email = request.Email;
             entity.Address = request.Address;
 
             await _context.SaveChangesAsync(cancellationToken);

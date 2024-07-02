@@ -10,6 +10,8 @@ public record class UpdateUserCommand : IRequest<UserEntity>
     public Guid Id { get; set; }
     public string? Phone { get; set; }
     public string? Picture { get; set; }
+    public string? Email { get; set; }
+
 }
 
 public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, UserEntity>
@@ -29,6 +31,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, UserE
         {
             entity.Phone = request.Phone;
             entity.Picture = request.Picture;
+            entity.Email = request.Email;
 
             await _context.SaveChangesAsync(cancellationToken);
 

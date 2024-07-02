@@ -1,11 +1,14 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Villajour.Application.Commands.Dto;
 using Villajour.Application.Commands.Mairies.AddMairie;
 using Villajour.Application.Commands.Mairies.DeleteMairie;
+using Villajour.Application.Commands.Mairies.GetDetailMairie;
 using Villajour.Application.Commands.Mairies.GetMairieById;
 using Villajour.Application.Commands.Mairies.GetMairies;
 using Villajour.Application.Commands.Mairies.UpdateMairie;
+using Villajour.Application.Commands.Users.GetMairieFavByUser;
 using Villajour.Domain.Common;
 
 namespace Villajour.API.Controllers;
@@ -162,6 +165,40 @@ public class MairieController : ApiControllerBase
             else
             {
                 return StatusCode(400, "La mairie n'existe pas !");
+            }
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// fonction pour récupérer le détail de la mairie
+    /// </summary>
+    /// <param name="UserId"></param>
+    /// <param name="MairieId"></param>
+    /// <returns>Code http Ok et </returns>
+    [HttpGet("GetDetailMairie/{UserId}/{MairieId}")]
+    public async Task<IActionResult> GetMairieFavByUser(Guid UserId, Guid MairieId)
+    {
+        if (UserId.ToString().IsNullOrEmpty()) return BadRequest("incorrect user Guid.");
+        if (MairieId.ToString().IsNullOrEmpty()) return BadRequest("incorrect mairie Guid.");
+
+        try
+        {
+            GetDetailMairieCommand command = new GetDetailMairieCommand();
+            command.UserId = UserId;
+            command.MairieId = MairieId;
+            DetailMairieDto dto = await _mediator.Send(command);
+
+            if (dto != null)
+            {
+                return Ok(dto);
+            }
+            else
+            {
+                return NotFound("L'utilisateur n'existe pas !");
             }
         }
         catch (Exception ex)
