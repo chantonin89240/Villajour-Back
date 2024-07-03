@@ -15,10 +15,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="MediatR" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
     <PackageReference Include="Moq" />
-    <PackageReference Include="SpecFlow" />
-    <PackageReference Include="xunit" />
   </ItemGroup>
 
   <ItemGroup>
