@@ -182,6 +182,27 @@ internal class SemanticKernelService : ISemanticKernelService
         return chats;
     }
 
+    public async Task<ChatSession?> GetChatSessionsAsync(Guid userId)
+    {
+        var chats = new List<ChatSession>();
+
+        if (!string.IsNullOrWhiteSpace(userId.ToString()))
+        {
+            var chatParticipants = await chatParticipantRepository.FindByUserIdAsync(userId.ToString());
+
+            foreach (var chatParticipant in chatParticipants)
+            {
+                ChatSession? chat = null;
+                if (await chatSessionRepository.TryFindByIdAsync(chatParticipant.ChatId, callback: v => chat = v))
+                {
+                    chats.Add(chat!);
+                }
+            }
+        }
+
+        return chats.MaxBy(chat => chat.CreatedOn);
+    }
+
     public async Task<List<ChatMessage>?> GetChatMessagesAsync(Guid chatId)
     {
         var chatMessages = await chatMessageRepository.FindByChatIdAsync(chatId.ToString());

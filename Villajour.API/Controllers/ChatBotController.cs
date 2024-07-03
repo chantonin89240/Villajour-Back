@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using Villajour.Application.Chatbot.Interfaces;
 
 namespace Villajour.API.Controllers;
@@ -19,9 +20,16 @@ public class ChatBotController : ApiControllerBase
         return Ok(await semanticKernelService.GetAllChatSessionsAsync(userId));
     }
 
-    [HttpPost("session/{userId}")]
+    [HttpGet("session/{userId}/getlastsession")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> CreateSession(Guid userId)
+    public async Task<IActionResult> GetChatSessionsAsync(Guid userId)
+    {
+        return Ok(await semanticKernelService.GetChatSessionsAsync(userId));
+    }
+
+    [HttpPost("session")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> CreateSession([FromBody] Guid userId)
     {
         return Ok(await semanticKernelService.CreateChatSessionAsync(userId));
     }
@@ -39,7 +47,7 @@ public class ChatBotController : ApiControllerBase
     [HttpPost("{chatId}/messages")]
     public async IAsyncEnumerable<string?> ChatAsync([FromBody] string message,[FromRoute] Guid chatId)
     {
-        var userId = new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6");
+        var userId = new Guid(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
         await foreach (var response in semanticKernelService.ChatAsync(userId, chatId, message))
         {
             yield return response;
