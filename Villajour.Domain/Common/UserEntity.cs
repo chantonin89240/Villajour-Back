@@ -17,4 +17,8 @@ public class UserEntity
 
     [Column(Order = 2)]
     public string? Picture { get; set; }
+
+    [Required]
+    [Column(Order = 3)]
+    public string? Email { get; set; }
 }

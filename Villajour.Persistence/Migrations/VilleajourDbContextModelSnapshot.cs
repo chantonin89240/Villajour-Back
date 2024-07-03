@@ -496,6 +496,11 @@ namespace Villajour.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnOrder(2);
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnOrder(3);
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");
