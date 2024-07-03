@@ -9,9 +9,9 @@ public class ApiBenchmark
     private readonly HttpClient _client = new HttpClient();
 
     [Benchmark]
-    public async Task GetEventFavoriteByUser()
+    public async Task GetMairie()
     {
-        var response = await _client.GetAsync("https://localhost:5000/Api/Event/GetEventFavoriteByUser/123e4567-e89b-12d3-a456-426614174000");
+        var response = await _client.GetAsync("https://localhost:44357/Api/Mairie");
         response.EnsureSuccessStatusCode();
     }
 }
