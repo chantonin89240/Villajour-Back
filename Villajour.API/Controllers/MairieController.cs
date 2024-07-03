@@ -5,10 +5,10 @@ using Villajour.Application.Commands.Dto;
 using Villajour.Application.Commands.Mairies.AddMairie;
 using Villajour.Application.Commands.Mairies.DeleteMairie;
 using Villajour.Application.Commands.Mairies.GetDetailMairie;
+using Villajour.Application.Commands.Mairies.GetHomeMairie;
 using Villajour.Application.Commands.Mairies.GetMairieById;
 using Villajour.Application.Commands.Mairies.GetMairies;
 using Villajour.Application.Commands.Mairies.UpdateMairie;
-using Villajour.Application.Commands.Users.GetMairieFavByUser;
 using Villajour.Domain.Common;
 
 namespace Villajour.API.Controllers;
@@ -178,7 +178,7 @@ public class MairieController : ApiControllerBase
     /// </summary>
     /// <param name="UserId"></param>
     /// <param name="MairieId"></param>
-    /// <returns>Code http Ok et </returns>
+    /// <returns>Code http Ok et objet DetailMairieDto</returns>
     [HttpGet("GetDetailMairie/{UserId}/{MairieId}")]
     public async Task<IActionResult> GetMairieFavByUser(Guid UserId, Guid MairieId)
     {
@@ -199,6 +199,37 @@ public class MairieController : ApiControllerBase
             else
             {
                 return NotFound("L'utilisateur n'existe pas !");
+            }
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// fonction pour récupérer les info de la page home de la mairie
+    /// </summary>
+    /// <param name="MairieId"></param>
+    /// <returns>Code http Ok et </returns>
+    [HttpGet("GetHomeMairie/{MairieId}")]
+    public async Task<IActionResult> GetHomeMairie(Guid MairieId)
+    {
+        if (MairieId.ToString().IsNullOrEmpty()) return BadRequest("incorrect mairie Guid.");
+
+        try
+        {
+            GetHomeMairieCommand command = new GetHomeMairieCommand();
+            command.MairieId = MairieId;
+            HomeMairieDto dto = await _mediator.Send(command);
+
+            if (dto != null)
+            {
+                return Ok(dto);
+            }
+            else
+            {
+                return NotFound("La mairie n'existe pas !");
             }
         }
         catch (Exception ex)
