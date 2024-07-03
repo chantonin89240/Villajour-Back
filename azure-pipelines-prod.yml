@@ -3,40 +3,92 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- main
+trigger: none
 
 variables:
   solution: '*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-steps:
-- task: UseDotNet@2
-  displayName: 'Use .NET Core sdk 8.0.x'
-  inputs:
-    version: 8.0.x
+jobs:
+  - job: build
+    displayName: Build & Publish
+    steps:
+    - task: UseDotNet@2
+      displayName: 'Use .NET Core sdk 8.0.x'
+      inputs:
+        version: 8.0.x
 
-- task: DotNetCoreCLI@2
-  displayName: Restore
-  inputs:
-    command: restore
-    projects: '**/*.csproj'
+    - task: DotNetCoreCLI@2
+      displayName: Restore
+      inputs:
+        command: restore
+        projects: '**/*.csproj'
 
-- task: DotNetCoreCLI@2
-  displayName: Build
-  inputs:
-    command: build
-    projects: '**/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
+    - task: DotNetCoreCLI@2
+      displayName: Build
+      inputs:
+        command: build
+        projects: '**/*.csproj'
+        arguments: '--configuration $(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  displayName: Test
-  inputs:
-    command: test
-    projects: '**/*.UnitTest.csproj'
-    arguments: '--configuration $(buildConfiguration)'
+    - task: DotNetCoreCLI@2
+      displayName: Test
+      inputs:
+        command: test
+        projects: '**/*.UnitTest.csproj'
+        arguments: '--configuration $(buildConfiguration)'
 
-- task: QodanaScan@2024
-  env:
-    QODANA_TOKEN: $(QODANA_TOKEN)
+    - task: QodanaScan@2024
+      env:
+        QODANA_TOKEN: $(QODANA_TOKEN)
+
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'publish'
+        projects: '**/Villajour.API.csproj'
+        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'API_$(Build.BuildNumber)'
+        publishLocation: 'Container'
+      condition: succeededOrFailed()
+
+  - job: deploy
+    displayName: Deployment..
+    dependsOn: build
+
+    steps:
+    - task: DownloadBuildArtifacts@1
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'API_$(Build.BuildNumber)'
+        downloadPath: '$(System.ArtifactsDirectory)'
+
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'Backend (Diiage2024.VillAjour.2)(819c5e11-7895-460e-81b6-51707835293e)'
+        appType: 'webAppLinux'
+        WebAppName: 'webApp-zqbhqxnptlhnu'
+        packageForLinux: '$(Build.ArtifactStagingDirectory)/API_$(Build.BuildNumber)/*.zip'
+        RuntimeStack: 'DOTNETCORE|8.0'
+
+    - task: AzureAppServiceSettings@1
+      inputs:
+        azureSubscription: 'Backend (Diiage2024.VillAjour.2)(819c5e11-7895-460e-81b6-51707835293e)'
+        appName: 'webApp-zqbhqxnptlhnu'
+        resourceGroupName: 'villajourBackend'
+        connectionStrings: |
+          [
+            {
+              "name": "DefaultConnection",
+              "value": "$(dbVillajour_ConnectionString)",
+              "type": "SQLServer",
+              "slotSetting": false
+            }
+          ]
+
