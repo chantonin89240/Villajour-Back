@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using Villajour.Application.Commands.Interface;
 using Villajour.Domain.Common;
 
@@ -11,6 +13,8 @@ public record class AddMairieCommand : IRequest<MairieEntity>
     public string? Picture { get; set; }
     public string? Siret { get; set; }
     public string? Address { get; set; }
+    public string? Name { get; set; }
+    public string? Email { get; set; }
 
 }
 
@@ -32,6 +36,8 @@ public class AddMairieCommandHandler : IRequestHandler<AddMairieCommand, MairieE
             Picture = request.Picture,
             Siret = request.Siret,
             Address = request.Address,
+            Name = request.Name,
+            Email = request.Email,
         };
 
         _context.Mairies.Add(entity);
