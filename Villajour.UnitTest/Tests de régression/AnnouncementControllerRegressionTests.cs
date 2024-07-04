@@ -28,7 +28,7 @@ public class AnnouncementControllerRegressionTests
         _mediatorMock.Setup(m => m.Send(It.IsAny<AddAnnouncementCommand>(), default)).ReturnsAsync(announcement);
 
         // Act
-        var result = await _controller.AddAnnouncementt(command);
+        var result = await _controller.AddAnnouncement(command);
 
         // Assert
         var okResult = Assert.IsType<OkObjectResult>(result);
@@ -39,7 +39,7 @@ public class AnnouncementControllerRegressionTests
     public async Task AddAnnouncement_CommandIsNull_ReturnsBadRequest()
     {
         // Act
-        var result = await _controller.AddAnnouncementt(null);
+        var result = await _controller.AddAnnouncement(null);
 
         // Assert
         var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
@@ -55,7 +55,7 @@ public class AnnouncementControllerRegressionTests
         _mediatorMock.Setup(m => m.Send(It.IsAny<AddAnnouncementCommand>(), default)).ReturnsAsync((AnnouncementEntity)null);
 
         // Act
-        var result = await _controller.AddAnnouncementt(command);
+        var result = await _controller.AddAnnouncement(command);
 
         // Assert
         var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
